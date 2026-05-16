@@ -8,7 +8,9 @@ import { Label } from "@/components/ui/label";
 import {
 	Select,
 	SelectContent,
+	SelectGroup,
 	SelectItem,
+	SelectLabel,
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
@@ -40,14 +42,18 @@ function CopyBlock({ children }: { children: string }) {
 	);
 }
 
-const FREE_CLOUD_MODELS = [
+const CLOUD_MODELS = {
+	free: ["gemma3:4b", "gemma3:12b", "llama3.2:3b", "llama3.1:8b", "mistral:7b", "qwen2.5:7b", "phi4"],
+	paid: ["medgemma", "medgemma1.5", "gemma3:27b", "llama3.1:70b", "llama3.1:405b"],
+};
+
+const LOCAL_MODEL_SUGGESTIONS = [
+	"medgemma",
+	"medgemma1.5",
 	"gemma3:4b",
 	"gemma3:12b",
 	"llama3.2:3b",
-	"llama3.1:8b",
 	"mistral:7b",
-	"qwen2.5:7b",
-	"phi4",
 ];
 
 export function SettingsPage() {
@@ -215,29 +221,28 @@ export function SettingsPage() {
 
 								<div className="flex flex-col gap-1.5">
 									<Label>Model</Label>
-									{models.length > 0 ? (
-										<Select
-											value={safeSettings.ollama.model}
-											onValueChange={(v) => patch("ollama.model", v ?? "")}
-										>
-											<SelectTrigger>
-												<SelectValue />
-											</SelectTrigger>
-											<SelectContent>
-												{models.map((m) => (
-													<SelectItem key={m} value={m}>
-														{m}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-									) : (
-										<Input
-											value={safeSettings.ollama.model}
-											onChange={(e) => patch("ollama.model", e.target.value)}
-											placeholder="medgemma"
-										/>
-									)}
+									<Select
+										value={safeSettings.ollama.model}
+										onValueChange={(v) => patch("ollama.model", v ?? "")}
+									>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a model" />
+										</SelectTrigger>
+										<SelectContent>
+											{models.length > 0 ? (
+												models.map((m) => (
+													<SelectItem key={m} value={m}>{m}</SelectItem>
+												))
+											) : (
+												<SelectGroup>
+													<SelectLabel>Common models</SelectLabel>
+													{LOCAL_MODEL_SUGGESTIONS.map((m) => (
+														<SelectItem key={m} value={m}>{m}</SelectItem>
+													))}
+												</SelectGroup>
+											)}
+										</SelectContent>
+									</Select>
 								</div>
 
 								<div className="flex flex-col gap-1.5">
@@ -333,11 +338,18 @@ export function SettingsPage() {
 											<SelectValue placeholder="Select a model" />
 										</SelectTrigger>
 										<SelectContent>
-											{FREE_CLOUD_MODELS.map((m) => (
-												<SelectItem key={m} value={m}>
-													{m}
-												</SelectItem>
-											))}
+											<SelectGroup>
+												<SelectLabel>Free</SelectLabel>
+												{CLOUD_MODELS.free.map((m) => (
+													<SelectItem key={m} value={m}>{m}</SelectItem>
+												))}
+											</SelectGroup>
+											<SelectGroup>
+												<SelectLabel>Subscription required</SelectLabel>
+												{CLOUD_MODELS.paid.map((m) => (
+													<SelectItem key={m} value={m}>{m}</SelectItem>
+												))}
+											</SelectGroup>
 										</SelectContent>
 									</Select>
 								</div>
