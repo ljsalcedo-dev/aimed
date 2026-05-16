@@ -40,10 +40,19 @@ function CopyBlock({ children }: { children: string }) {
 	);
 }
 
+const FREE_CLOUD_MODELS = [
+	"gemma3:4b",
+	"gemma3:12b",
+	"llama3.2:3b",
+	"llama3.1:8b",
+	"mistral:7b",
+	"qwen2.5:7b",
+	"phi4",
+];
+
 export function SettingsPage() {
 	const [settings, setSettings] = useState<AppSettings>(() => getSettings());
 	const [models, setModels] = useState<string[]>([]);
-	const [cloudModels, setCloudModels] = useState<string[]>([]);
 	const [connected, setConnected] = useState<boolean | null>(null);
 	const [checking, setChecking] = useState(false);
 	const [cloudConnected, setCloudConnected] = useState<boolean | null>(null);
@@ -69,10 +78,6 @@ export function SettingsPage() {
 		setCloudConnected(null);
 		const ok = await checkConnection("", settings.cloud.apiKey, settings.cloud.baseUrl);
 		setCloudConnected(ok);
-		if (ok) {
-			const list = await listModels("", settings.cloud.apiKey, settings.cloud.baseUrl);
-			setCloudModels(list);
-		}
 		setCloudChecking(false);
 	}, [settings.cloud.baseUrl, settings.cloud.apiKey]);
 
@@ -320,29 +325,21 @@ export function SettingsPage() {
 
 								<div className="flex flex-col gap-1.5">
 									<Label>Model</Label>
-									{cloudModels.length > 0 ? (
-										<Select
-											value={safeSettings.cloud.model}
-											onValueChange={(v) => patch("cloud.model", v ?? "")}
-										>
-											<SelectTrigger>
-												<SelectValue />
-											</SelectTrigger>
-											<SelectContent>
-												{cloudModels.map((m) => (
-													<SelectItem key={m} value={m}>
-														{m}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-									) : (
-										<Input
-											value={safeSettings.cloud.model}
-											onChange={(e) => patch("cloud.model", e.target.value)}
-											placeholder="e.g. gemma3:27b-cloud"
-										/>
-									)}
+									<Select
+										value={safeSettings.cloud.model}
+										onValueChange={(v) => patch("cloud.model", v ?? "")}
+									>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a model" />
+										</SelectTrigger>
+										<SelectContent>
+											{FREE_CLOUD_MODELS.map((m) => (
+												<SelectItem key={m} value={m}>
+													{m}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
 								</div>
 
 								<div className="flex flex-col gap-1.5">

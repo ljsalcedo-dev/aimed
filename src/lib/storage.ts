@@ -39,7 +39,7 @@ const DEFAULT_SETTINGS: AppSettings = {
 	},
 	cloud: {
 		baseUrl: "https://ollama.com",
-		model: "",
+		model: "gemma3:4b",
 		temperature: 0.7,
 		apiKey: "",
 	},
