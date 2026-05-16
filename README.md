@@ -21,7 +21,7 @@ An AI-powered medical exam review app for USMLE, NCLEX, and other licensing exam
 
 ## Prerequisites
 
-[Ollama](https://ollama.com) must be running locally with the MedGemma model pulled:
+[Ollama](https://ollama.com) must be running on your machine with the MedGemma model pulled — even when using the deployed version, since the LLM runs locally:
 
 ```bash
 ollama serve
