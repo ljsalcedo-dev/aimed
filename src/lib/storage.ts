@@ -43,7 +43,7 @@ const DEFAULT_SETTINGS: AppSettings = {
 		temperature: 0.7,
 		apiKey: "",
 	},
-	mode: "local",
+	mode: "cloud",
 	theme: "system",
 };
 
