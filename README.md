@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# aimed
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered medical exam review app for USMLE, NCLEX, and other licensing exams. Runs entirely in your browser — no backend, no account required.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Chat** — ask MedGemma anything; answers stream in real time
+- **Flashcards** — AI-generated cards with SM-2 spaced repetition scheduling
+- **Clinical Cases** — interactive case simulations with MedGemma as the attending
+- **Settings** — configure your Ollama endpoint and model; view study stats
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Layer | Tech |
+|---|---|
+| Framework | Vite + React 19 + TypeScript |
+| Styling | Tailwind CSS v4 + shadcn/ui |
+| Routing | React Router v7 |
+| LLM | Ollama (`medgemma` by default) |
+| Persistence | `localStorage` only |
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+[Ollama](https://ollama.com) must be running locally with the MedGemma model pulled:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+ollama serve
+ollama pull medgemma   # ~5 GB
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
+pnpm dev               # http://localhost:5173
 ```
+
+## Other commands
+
+```bash
+pnpm build             # production build
+pnpm tsc --noEmit      # type check
+pnpm lint              # eslint
+```
+
+## Configuration
+
+The Ollama base URL (`http://localhost:11434`) and model name are configurable on the **Settings** page and are stored in `localStorage` under `aimed:settings`. No environment variables needed.
