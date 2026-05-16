@@ -67,10 +67,10 @@ export function SettingsPage() {
 		if (!settings.cloud.baseUrl) return;
 		setCloudChecking(true);
 		setCloudConnected(null);
-		const ok = await checkConnection(settings.cloud.baseUrl, settings.cloud.apiKey);
+		const ok = await checkConnection("", settings.cloud.apiKey, settings.cloud.baseUrl);
 		setCloudConnected(ok);
 		if (ok) {
-			const list = await listModels(settings.cloud.baseUrl, settings.cloud.apiKey);
+			const list = await listModels("", settings.cloud.apiKey, settings.cloud.baseUrl);
 			setCloudModels(list);
 		}
 		setCloudChecking(false);

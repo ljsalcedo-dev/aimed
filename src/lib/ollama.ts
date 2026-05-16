@@ -11,7 +11,9 @@ export function getSettings(): OllamaSettings {
 		const raw = localStorage.getItem("aimed:settings");
 		if (!raw) return DEFAULT_SETTINGS;
 		const parsed = JSON.parse(raw) as AppSettings;
-		if (parsed.mode === "cloud" && parsed.cloud?.baseUrl) return parsed.cloud;
+		if (parsed.mode === "cloud" && parsed.cloud?.baseUrl) {
+			return { ...parsed.cloud, baseUrl: "", proxyTarget: parsed.cloud.baseUrl };
+		}
 		return parsed.ollama ?? DEFAULT_SETTINGS;
 	} catch {
 		return DEFAULT_SETTINGS;
@@ -38,10 +40,14 @@ export async function* streamChat(
 
 	const headers: Record<string, string> = { "Content-Type": "application/json" };
 	if (s.apiKey) headers.Authorization = `Bearer ${s.apiKey}`;
+	if (s.proxyTarget) headers["X-Ollama-Target"] = s.proxyTarget;
+
+	const chatUrl = s.proxyTarget ? "/api/chat" : `${s.baseUrl}/api/chat`;
+	const displayUrl = s.proxyTarget ?? s.baseUrl;
 
 	let response: Response;
 	try {
-		response = await fetch(`${s.baseUrl}/api/chat`, {
+		response = await fetch(chatUrl, {
 			method: "POST",
 			headers,
 			body: JSON.stringify({
@@ -54,7 +60,7 @@ export async function* streamChat(
 		});
 	} catch (err) {
 		throw new Error(
-			`Cannot reach Ollama at ${s.baseUrl}. Make sure Ollama is running and the model "${s.model}" is pulled.`,
+			`Cannot reach Ollama at ${displayUrl}. Make sure Ollama is running and the model "${s.model}" is pulled.`,
 			{ cause: err },
 		);
 	}
@@ -94,28 +100,26 @@ export async function* streamChat(
 	}
 }
 
-export async function checkConnection(baseUrl: string, apiKey?: string): Promise<boolean> {
+export async function checkConnection(baseUrl: string, apiKey?: string, proxyTarget?: string): Promise<boolean> {
 	try {
 		const headers: Record<string, string> = {};
 		if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-		const res = await fetch(`${baseUrl}/api/tags`, {
-			headers,
-			signal: AbortSignal.timeout(4000),
-		});
+		if (proxyTarget) headers["X-Ollama-Target"] = proxyTarget;
+		const url = proxyTarget ? "/api/tags" : `${baseUrl}/api/tags`;
+		const res = await fetch(url, { headers, signal: AbortSignal.timeout(4000) });
 		return res.ok;
 	} catch {
 		return false;
 	}
 }
 
-export async function listModels(baseUrl: string, apiKey?: string): Promise<string[]> {
+export async function listModels(baseUrl: string, apiKey?: string, proxyTarget?: string): Promise<string[]> {
 	try {
 		const headers: Record<string, string> = {};
 		if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-		const res = await fetch(`${baseUrl}/api/tags`, {
-			headers,
-			signal: AbortSignal.timeout(4000),
-		});
+		if (proxyTarget) headers["X-Ollama-Target"] = proxyTarget;
+		const url = proxyTarget ? "/api/tags" : `${baseUrl}/api/tags`;
+		const res = await fetch(url, { headers, signal: AbortSignal.timeout(4000) });
 		if (!res.ok) return [];
 		const data = (await res.json()) as { models?: { name: string }[] };
 		return data.models?.map((m) => m.name) ?? [];

@@ -64,6 +64,8 @@ export interface OllamaSettings {
 	model: string;
 	temperature: number;
 	apiKey?: string;
+	/** When set, requests are routed through the /api proxy with this as X-Ollama-Target */
+	proxyTarget?: string;
 }
 
 export type ModelMode = "local" | "cloud";
