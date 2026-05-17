@@ -102,15 +102,15 @@ export interface SrsStage {
 const STAGE_THRESHOLDS = [0.5, 1, 4, 14, 30, 90, 180, 365] as const;
 
 const STAGES: SrsStage[] = [
-	{ name: "Clerkship I",     bgClass: "bg-[oklch(0.70_0.12_55)]",  ringClass: "ring-[oklch(0.78_0.10_55)]" },
-	{ name: "Clerkship II",    bgClass: "bg-[oklch(0.70_0.12_55)]",  ringClass: "ring-[oklch(0.78_0.10_55)]" },
-	{ name: "Clerkship III",   bgClass: "bg-[oklch(0.70_0.12_55)]",  ringClass: "ring-[oklch(0.78_0.10_55)]" },
-	{ name: "Clerkship IV",    bgClass: "bg-[oklch(0.70_0.12_55)]",  ringClass: "ring-[oklch(0.78_0.10_55)]" },
-	{ name: "Resident I",      bgClass: "bg-[oklch(0.55_0.12_145)]", ringClass: "ring-[oklch(0.65_0.10_145)]" },
-	{ name: "Resident II",     bgClass: "bg-[oklch(0.55_0.12_145)]", ringClass: "ring-[oklch(0.65_0.10_145)]" },
-	{ name: "Fellow",          bgClass: "bg-[oklch(0.48_0.12_264)]", ringClass: "ring-[oklch(0.58_0.10_264)]" },
-	{ name: "Attending",       bgClass: "bg-[oklch(0.40_0.15_280)]", ringClass: "ring-[oklch(0.50_0.12_280)]" },
-	{ name: "Board-Certified", bgClass: "bg-[oklch(0.34_0.16_295)]", ringClass: "ring-[oklch(0.44_0.13_295)]" },
+	{ name: "Clerkship I",     bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
+	{ name: "Clerkship II",    bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
+	{ name: "Clerkship III",   bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
+	{ name: "Clerkship IV",    bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
+	{ name: "Resident I",      bgClass: "bg-teal-600",   ringClass: "ring-teal-400" },
+	{ name: "Resident II",     bgClass: "bg-teal-600",   ringClass: "ring-teal-400" },
+	{ name: "Fellow",          bgClass: "bg-indigo-500", ringClass: "ring-indigo-300" },
+	{ name: "Attending",       bgClass: "bg-violet-600", ringClass: "ring-violet-400" },
+	{ name: "Board-Certified", bgClass: "bg-purple-700", ringClass: "ring-purple-500" },
 ];
 
 export function getSrsStage(card: Flashcard): SrsStage {

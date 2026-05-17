@@ -101,11 +101,11 @@ function SrsDistribution({ cards }: { cards: Flashcard[] }) {
 	const total = cards.length;
 	// Group boundaries match the STAGE_THRESHOLDS in sm2.ts (days of stability)
 	const groups = [
-		{ label: "Clerkship",       minS: 0,   maxS: 14,       bgClass: "bg-[oklch(0.70_0.12_55)]" },
-		{ label: "Resident",        minS: 14,  maxS: 90,       bgClass: "bg-[oklch(0.55_0.12_145)]" },
-		{ label: "Fellow",          minS: 90,  maxS: 180,      bgClass: "bg-[oklch(0.48_0.12_264)]" },
-		{ label: "Attending",       minS: 180, maxS: 365,      bgClass: "bg-[oklch(0.40_0.15_280)]" },
-		{ label: "Board-Certified", minS: 365, maxS: Infinity, bgClass: "bg-[oklch(0.34_0.16_295)]" },
+		{ label: "Clerkship",       minS: 0,   maxS: 14,       bgClass: "bg-sky-500" },
+		{ label: "Resident",        minS: 14,  maxS: 90,       bgClass: "bg-teal-600" },
+		{ label: "Fellow",          minS: 90,  maxS: 180,      bgClass: "bg-indigo-500" },
+		{ label: "Attending",       minS: 180, maxS: 365,      bgClass: "bg-violet-600" },
+		{ label: "Board-Certified", minS: 365, maxS: Infinity, bgClass: "bg-purple-700" },
 	];
 
 	const counts = groups.map((g) => ({
@@ -648,7 +648,7 @@ export function FlashcardsPage() {
 									<Card
 										key={card.id}
 										className={cn(
-											"group relative",
+											"group relative flex flex-col",
 											isDue(card) && "ring-1 ring-primary/40",
 										)}
 									>
@@ -663,13 +663,13 @@ export function FlashcardsPage() {
 												<button
 													type="button"
 													onClick={() => remove(card.id)}
-													className="hidden group-hover:block text-muted-foreground hover:text-destructive transition-colors"
+													className="text-muted-foreground hover:text-destructive transition-colors"
 												>
 													<Trash2 size={13} />
 												</button>
 											</div>
 										</CardHeader>
-										<CardContent className="pb-3">
+										<CardContent className="pb-3 flex-1">
 											<p className="text-sm font-medium line-clamp-3">
 												{card.front}
 											</p>
@@ -682,7 +682,7 @@ export function FlashcardsPage() {
 														Due now
 													</span>
 												) : (
-													new Date(card.dueDate).toLocaleDateString()
+													new Date(card.dueDate).toLocaleString([], { month: "numeric", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" })
 												)}
 											</span>
 										</CardFooter>
@@ -706,13 +706,13 @@ export function FlashcardsPage() {
 						) : (
 							<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 p-1">
 								{dueCards.map((card) => (
-									<Card key={card.id} className="ring-1 ring-primary/40">
+									<Card key={card.id} className="ring-1 ring-primary/40 flex flex-col">
 										<CardHeader className="pb-2">
 											<Badge variant="secondary" className="w-fit text-xs">
 												{card.category}
 											</Badge>
 										</CardHeader>
-										<CardContent>
+										<CardContent className="flex-1">
 											<p className="text-sm font-medium line-clamp-3">
 												{card.front}
 											</p>

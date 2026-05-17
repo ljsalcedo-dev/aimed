@@ -310,7 +310,7 @@ export function ChatPage() {
 							<button
 								type="button"
 								onClick={() => removeSession(s.id)}
-								className="hidden group-hover:flex shrink-0 items-center rounded p-1 mr-1 hover:text-destructive"
+								className="flex shrink-0 items-center rounded p-1 mr-1 text-muted-foreground hover:text-destructive"
 							>
 								<Trash2 size={11} />
 							</button>

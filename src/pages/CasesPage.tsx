@@ -626,7 +626,7 @@ export function CasesPage() {
 													<button
 														type="button"
 														onClick={(e) => remove(c.id, e)}
-														className="hidden group-hover:block text-muted-foreground hover:text-destructive"
+														className="text-muted-foreground hover:text-destructive"
 													>
 														<Trash2 size={13} />
 													</button>
@@ -673,7 +673,7 @@ export function CasesPage() {
 													<button
 														type="button"
 														onClick={(e) => remove(c.id, e)}
-														className="hidden group-hover:block text-muted-foreground hover:text-destructive"
+														className="text-muted-foreground hover:text-destructive"
 													>
 														<Trash2 size={13} />
 													</button>
