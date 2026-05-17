@@ -60,6 +60,7 @@ export function getSettings(): AppSettings {
 
 export function saveSettings(settings: AppSettings): void {
 	write(KEYS.SETTINGS, settings);
+	window.dispatchEvent(new CustomEvent("aimed:settings-changed"));
 }
 
 // ── Chat sessions ────────────────────────────────────────────────────────────
