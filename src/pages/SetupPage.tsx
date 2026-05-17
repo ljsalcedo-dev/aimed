@@ -180,7 +180,7 @@ function CloudSetup({ onReady }: { onReady: () => void }) {
 	async function test() {
 		if (!apiKey.trim()) return;
 		setStatus("checking");
-		const ok = await checkConnection(baseUrl, apiKey);
+		const ok = await checkConnection("", apiKey, baseUrl);
 		if (ok) {
 			saveSettings({
 				...getSettings(),
