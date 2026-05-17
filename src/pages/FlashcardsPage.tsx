@@ -1,14 +1,19 @@
 import {
 	BookOpen,
+	Brain,
 	Check,
 	ChevronLeft,
+	ChevronRight,
+	CircleHelp,
+	GraduationCap,
 	Loader2,
 	Plus,
 	Sparkles,
+	Star,
 	Trash2,
 	X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -40,6 +45,8 @@ import {
 } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 import type { Flashcard } from "@/types";
+
+const GUIDE_KEY = "aimed:flashcard-guide-seen";
 
 const CATEGORIES = [
 	"General",
@@ -512,6 +519,256 @@ BACK: [answer or explanation]`,
 	);
 }
 
+// ── Flashcard guide ───────────────────────────────────────────────────────────
+
+function FlashcardGuide({
+	open,
+	onClose,
+}: {
+	open: boolean;
+	onClose: () => void;
+}) {
+	const [step, setStep] = useState(0);
+
+	useEffect(() => {
+		if (open) setStep(0);
+	}, [open]);
+
+	const steps = [
+		{
+			icon: <BookOpen size={26} />,
+			iconBg: "bg-blue-500/10 text-blue-500",
+			title: "Build your deck",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						Add cards to your library two ways:
+					</p>
+					<div className="grid gap-2">
+						<div className="flex items-start gap-3 rounded-lg border bg-muted/30 p-3">
+							<div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded bg-muted">
+								<Plus size={14} />
+							</div>
+							<div>
+								<p className="text-sm font-medium">Manual</p>
+								<p className="text-xs text-muted-foreground mt-0.5">
+									Write your own question and answer for any medical concept.
+								</p>
+							</div>
+						</div>
+						<div className="flex items-start gap-3 rounded-lg border bg-muted/30 p-3">
+							<div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded bg-muted">
+								<Sparkles size={14} />
+							</div>
+							<div>
+								<p className="text-sm font-medium">AI-generated</p>
+								<p className="text-xs text-muted-foreground mt-0.5">
+									Type a topic like "Conn's syndrome" and MedGemma creates a
+									high-yield card instantly.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			),
+		},
+		{
+			icon: <Brain size={26} />,
+			iconBg: "bg-teal-500/10 text-teal-600",
+			title: "Daily review sessions",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						Cards due for review get a highlight ring. Work through them in a
+						focused session.
+					</p>
+					<div className="rounded-lg border bg-muted/30 p-4 space-y-3">
+						{[
+							"See the question",
+							"Think of your answer",
+							"Tap the card to reveal",
+							"Rate how well you recalled it",
+						].map((text, i) => (
+							<div key={i} className="flex items-center gap-3 text-sm">
+								<span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-[11px] font-bold">
+									{i + 1}
+								</span>
+								<span>{text}</span>
+							</div>
+						))}
+					</div>
+				</div>
+			),
+		},
+		{
+			icon: <Star size={26} />,
+			iconBg: "bg-yellow-500/10 text-yellow-600",
+			title: "Rate your recall",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						After flipping a card, rate how easily you recalled it. Honest
+						ratings drive smarter scheduling.
+					</p>
+					<div className="grid gap-2">
+						{[
+							{
+								label: "Again",
+								bg: "bg-red-500",
+								desc: "Complete blank — forgot the answer",
+							},
+							{
+								label: "Hard",
+								bg: "bg-yellow-500",
+								desc: "Remembered, but with real effort",
+							},
+							{
+								label: "Good",
+								bg: "bg-blue-500",
+								desc: "Recalled correctly with slight hesitation",
+							},
+							{
+								label: "Easy",
+								bg: "bg-green-500",
+								desc: "Instant recall — no effort needed",
+							},
+						].map((r) => (
+							<div
+								key={r.label}
+								className="flex items-center gap-3 rounded-lg border p-2.5"
+							>
+								<span
+									className={cn(
+										"rounded px-2 py-0.5 text-xs font-bold text-white shrink-0",
+										r.bg,
+									)}
+								>
+									{r.label}
+								</span>
+								<span className="text-xs text-muted-foreground">{r.desc}</span>
+							</div>
+						))}
+					</div>
+				</div>
+			),
+		},
+		{
+			icon: <GraduationCap size={26} />,
+			iconBg: "bg-purple-500/10 text-purple-600",
+			title: "Earn your credentials",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						Every card has a career stage based on how well you know it.
+						Consistent recall advances cards to longer review intervals.
+					</p>
+					<div className="flex flex-wrap items-center gap-1.5">
+						{[
+							{ name: "Clerkship", bgClass: "bg-sky-500" },
+							{ name: "Resident", bgClass: "bg-teal-600" },
+							{ name: "Fellow", bgClass: "bg-indigo-500" },
+							{ name: "Attending", bgClass: "bg-violet-600" },
+							{ name: "Board-Certified", bgClass: "bg-purple-700" },
+						].map((stage, i, arr) => (
+							<div key={stage.name} className="flex items-center gap-1.5">
+								<span
+									className={cn(
+										"inline-flex items-center rounded px-2 py-0.5 text-[11px] font-bold text-[oklch(0.98_0.003_264)]",
+										stage.bgClass,
+									)}
+								>
+									{stage.name}
+								</span>
+								{i < arr.length - 1 && (
+									<ChevronRight size={11} className="text-muted-foreground" />
+								)}
+							</div>
+						))}
+					</div>
+					<p className="text-xs text-muted-foreground bg-muted/50 rounded-lg p-3 leading-relaxed">
+						Board-Certified cards appear roughly once a year — mastered material
+						stays out of your way so you focus on what still needs work.
+					</p>
+				</div>
+			),
+		},
+	];
+
+	const current = steps[step];
+	const isLast = step === steps.length - 1;
+
+	return (
+		<Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
+			<DialogContent className="max-w-md">
+				{/* Step dots */}
+				<div className="flex justify-center gap-1.5 mt-1">
+					{steps.map((_, i) => (
+						<button
+							key={i}
+							type="button"
+							onClick={() => setStep(i)}
+							aria-label={`Step ${i + 1}`}
+							className={cn(
+								"h-1.5 rounded-full transition-all duration-200",
+								i === step
+									? "w-6 bg-primary"
+									: "w-1.5 bg-muted-foreground/25 hover:bg-muted-foreground/50",
+							)}
+						/>
+					))}
+				</div>
+
+				{/* Icon + Title */}
+				<div className="flex flex-col items-center text-center gap-3 mt-4">
+					<div
+						className={cn(
+							"flex size-14 items-center justify-center rounded-2xl",
+							current.iconBg,
+						)}
+					>
+						{current.icon}
+					</div>
+					<DialogTitle className="text-xl">{current.title}</DialogTitle>
+				</div>
+
+				{/* Step content */}
+				<div className="mt-1">{current.content}</div>
+
+				{/* Navigation */}
+				<div className="flex items-center justify-between mt-4 pt-4 border-t">
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={() => setStep((s) => s - 1)}
+						disabled={step === 0}
+						className="w-20"
+					>
+						<ChevronLeft size={14} className="mr-1" />
+						Back
+					</Button>
+					<span className="text-xs text-muted-foreground">
+						{step + 1} / {steps.length}
+					</span>
+					{isLast ? (
+						<Button size="sm" onClick={onClose} className="w-20">
+							Got it!
+						</Button>
+					) : (
+						<Button
+							size="sm"
+							onClick={() => setStep((s) => s + 1)}
+							className="w-20"
+						>
+							Next
+							<ChevronRight size={14} className="ml-1" />
+						</Button>
+					)}
+				</div>
+			</DialogContent>
+		</Dialog>
+	);
+}
+
 // ── Main page ─────────────────────────────────────────────────────────────────
 
 export function FlashcardsPage() {
@@ -519,6 +776,18 @@ export function FlashcardsPage() {
 	const [creating, setCreating] = useState(false);
 	const [reviewing, setReviewing] = useState(false);
 	const [filterCategory, setFilterCategory] = useState<string | null>(null);
+	const [showGuide, setShowGuide] = useState(
+		() => !localStorage.getItem(GUIDE_KEY),
+	);
+
+	function openGuide() {
+		setShowGuide(true);
+	}
+
+	function closeGuide() {
+		localStorage.setItem(GUIDE_KEY, "1");
+		setShowGuide(false);
+	}
 
 	const dueCards = cards.filter(isDue);
 	const displayed = filterCategory
@@ -557,7 +826,16 @@ export function FlashcardsPage() {
 						{cards.length} total · {dueCards.length} due
 					</p>
 				</div>
-				<div className="flex gap-2">
+				<div className="flex items-center gap-2">
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={openGuide}
+						className="h-8 w-8 text-muted-foreground"
+						title="How it works"
+					>
+						<CircleHelp size={15} />
+					</Button>
 					{dueCards.length > 0 && (
 						<Button onClick={() => setReviewing(true)}>
 							<BookOpen size={14} className="mr-2" />
@@ -735,6 +1013,7 @@ export function FlashcardsPage() {
 					refresh();
 				}}
 			/>
+			<FlashcardGuide open={showGuide} onClose={closeGuide} />
 		</div>
 	);
 }
