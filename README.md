@@ -2,6 +2,17 @@
 
 An AI-powered medical exam review app for USMLE, NCLEX, and other licensing exams. Runs entirely in your browser — no backend, no account, no data sent to the cloud.
 
+## Desktop Releases
+
+The easiest way to get started is to download a pre-built desktop binary from the [GitHub Releases page](https://github.com/ljsalcedo-dev/aimed/releases).
+
+Supported platforms:
+- macOS
+- Windows
+- Linux
+
+This option lets you run aimed without installing Rust, Node.js, or pnpm.
+
 ## Features
 
 - **Chat** — ask medical questions; answers stream in real time with an AI disclaimer
