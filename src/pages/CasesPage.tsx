@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { AiDisclaimer } from "@/components/AiDisclaimer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -571,6 +572,8 @@ export function CasesPage() {
 					Generate case
 				</Button>
 			</div>
+
+			<AiDisclaimer storageKey="aimed:cases-disclaimer-seen" />
 
 			<ScrollArea className="flex-1 px-6 py-4">
 				{cases.length === 0 ? (

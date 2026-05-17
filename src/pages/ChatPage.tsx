@@ -1,5 +1,6 @@
 import { LayoutList, Plus, Send, Square, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { AiDisclaimer } from "@/components/AiDisclaimer";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
@@ -352,6 +353,7 @@ export function ChatPage() {
 						<Plus size={14} />
 					</Button>
 				</div>
+				<AiDisclaimer storageKey="aimed:chat-disclaimer-seen" />
 				{activeSession ? (
 					<>
 						{/* Messages */}
