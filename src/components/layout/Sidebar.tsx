@@ -33,8 +33,16 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
 	return (
 		<aside className="flex h-full w-56 flex-col border-r bg-sidebar">
 			{/* Brand */}
-			<div className="flex items-center px-4 py-4 border-b">
+			<div className="flex flex-col px-4 py-4 border-b">
 				<AimedLogoSidebar />
+				<a
+					href="https://ljsalcedo.dev"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="mt-1 text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+				>
+					by ljsalcedo.dev
+				</a>
 			</div>
 
 			{/* Navigation */}
