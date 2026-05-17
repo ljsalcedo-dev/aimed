@@ -6,6 +6,7 @@ import {
 	Settings,
 	Stethoscope,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { getSettings } from "@/lib/storage";
@@ -18,7 +19,14 @@ const NAV = [
 ];
 
 export function Sidebar({ onClose }: { onClose?: () => void }) {
-	const settings = getSettings();
+	const [settings, setSettings] = useState(getSettings);
+
+	useEffect(() => {
+		const refresh = () => setSettings(getSettings());
+		window.addEventListener("aimed:settings-changed", refresh);
+		return () => window.removeEventListener("aimed:settings-changed", refresh);
+	}, []);
+
 	const isCloud = settings.mode === "cloud";
 	const model = isCloud ? settings.cloud.model : settings.ollama.model;
 
