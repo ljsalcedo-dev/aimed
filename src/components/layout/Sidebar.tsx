@@ -1,6 +1,5 @@
 import {
 	BookOpen,
-	BrainCircuit,
 	Cloud,
 	FlaskConical,
 	MessageSquare,
@@ -10,6 +9,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { getSettings } from "@/lib/storage";
+import { AimedLogoSidebar } from "./AimedLogo";
 
 const NAV = [
 	{ to: "/chat", icon: MessageSquare, label: "Chat" },
@@ -25,14 +25,8 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
 	return (
 		<aside className="flex h-full w-56 flex-col border-r bg-sidebar">
 			{/* Brand */}
-			<div className="flex items-center gap-2.5 px-4 py-5 border-b">
-				<div className="flex size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-accent-foreground">
-					<BrainCircuit size={18} />
-				</div>
-				<div className="leading-none">
-					<p className="font-semibold text-sm text-sidebar-foreground">aimed</p>
-					<p className="text-xs text-muted-foreground">Medical Review App using AI Models</p>
-				</div>
+			<div className="flex items-center px-4 py-4 border-b">
+				<AimedLogoSidebar />
 			</div>
 
 			{/* Navigation */}
