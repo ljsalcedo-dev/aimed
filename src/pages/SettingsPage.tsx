@@ -88,6 +88,7 @@ export function SettingsPage() {
 	}, [settings.cloud.baseUrl, settings.cloud.apiKey]);
 
 	useEffect(() => {
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		testLocalConnection();
 	}, [testLocalConnection]);
 
@@ -102,7 +103,7 @@ export function SettingsPage() {
 			const next = structuredClone(prev);
 			const keys = path.split(".");
 			// biome-ignore lint/suspicious/noExplicitAny: dynamic path patching
-			let obj: any = next;
+			let obj: any = next; // eslint-disable-line @typescript-eslint/no-explicit-any
 			for (let i = 0; i < keys.length - 1; i++) obj = obj[keys[i]];
 			obj[keys[keys.length - 1]] = value;
 			return next;

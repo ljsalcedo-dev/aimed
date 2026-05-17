@@ -193,7 +193,9 @@ export function ChatPage() {
 			id: generateId(),
 			title: "New chat",
 			messages: [],
+			// eslint-disable-next-line react-hooks/purity
 			createdAt: Date.now(),
+			// eslint-disable-next-line react-hooks/purity
 			updatedAt: Date.now(),
 		};
 		saveChatSession(session);
@@ -216,6 +218,7 @@ export function ChatPage() {
 			id: generateId(),
 			role: "user",
 			content: text,
+			// eslint-disable-next-line react-hooks/purity
 			timestamp: Date.now(),
 		};
 		const updatedMessages = [...activeSession.messages, userMsg];
@@ -227,6 +230,7 @@ export function ChatPage() {
 					? text.slice(0, 60)
 					: activeSession.title,
 			messages: updatedMessages,
+			// eslint-disable-next-line react-hooks/purity
 			updatedAt: Date.now(),
 		};
 		saveChatSession(updated);

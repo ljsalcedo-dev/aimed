@@ -1,6 +1,9 @@
 import {
+	Brain,
 	Check,
 	ChevronLeft,
+	ChevronRight,
+	CircleHelp,
 	Loader2,
 	Plus,
 	Sparkles,
@@ -44,6 +47,8 @@ import {
 } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 import type { ClinicalCase, Message } from "@/types";
+
+const GUIDE_KEY = "aimed:cases-guide-seen";
 
 const SPECIALTIES = [
 	"General Medicine",
@@ -212,7 +217,12 @@ function CaseConversation({
 					</div>
 				</div>
 				{currentCase.status === "completed" ? (
-					<Button variant="ghost" size="sm" onClick={reopen} className="text-muted-foreground">
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={reopen}
+						className="text-muted-foreground"
+					>
 						Reopen
 					</Button>
 				) : (
@@ -253,16 +263,40 @@ function CaseConversation({
 								<ReactMarkdown
 									remarkPlugins={[remarkGfm]}
 									components={{
-										p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-										ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-0.5">{children}</ul>,
-										ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 space-y-0.5">{children}</ol>,
+										p: ({ children }) => (
+											<p className="mb-2 last:mb-0">{children}</p>
+										),
+										ul: ({ children }) => (
+											<ul className="list-disc pl-4 mb-2 space-y-0.5">
+												{children}
+											</ul>
+										),
+										ol: ({ children }) => (
+											<ol className="list-decimal pl-4 mb-2 space-y-0.5">
+												{children}
+											</ol>
+										),
 										li: ({ children }) => <li>{children}</li>,
-										strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-										em: ({ children }) => <em className="italic">{children}</em>,
-										h1: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
-										h2: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
-										h3: ({ children }) => <p className="font-medium mb-1">{children}</p>,
-										code: ({ children }) => <code className="rounded bg-black/10 dark:bg-white/10 px-1 font-mono text-xs">{children}</code>,
+										strong: ({ children }) => (
+											<strong className="font-semibold">{children}</strong>
+										),
+										em: ({ children }) => (
+											<em className="italic">{children}</em>
+										),
+										h1: ({ children }) => (
+											<p className="font-semibold mb-1">{children}</p>
+										),
+										h2: ({ children }) => (
+											<p className="font-semibold mb-1">{children}</p>
+										),
+										h3: ({ children }) => (
+											<p className="font-medium mb-1">{children}</p>
+										),
+										code: ({ children }) => (
+											<code className="rounded bg-black/10 dark:bg-white/10 px-1 font-mono text-xs">
+												{children}
+											</code>
+										),
 									}}
 								>
 									{msg.content}
@@ -278,16 +312,40 @@ function CaseConversation({
 								<ReactMarkdown
 									remarkPlugins={[remarkGfm]}
 									components={{
-										p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-										ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-0.5">{children}</ul>,
-										ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 space-y-0.5">{children}</ol>,
+										p: ({ children }) => (
+											<p className="mb-2 last:mb-0">{children}</p>
+										),
+										ul: ({ children }) => (
+											<ul className="list-disc pl-4 mb-2 space-y-0.5">
+												{children}
+											</ul>
+										),
+										ol: ({ children }) => (
+											<ol className="list-decimal pl-4 mb-2 space-y-0.5">
+												{children}
+											</ol>
+										),
 										li: ({ children }) => <li>{children}</li>,
-										strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-										em: ({ children }) => <em className="italic">{children}</em>,
-										h1: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
-										h2: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
-										h3: ({ children }) => <p className="font-medium mb-1">{children}</p>,
-										code: ({ children }) => <code className="rounded bg-black/10 dark:bg-white/10 px-1 font-mono text-xs">{children}</code>,
+										strong: ({ children }) => (
+											<strong className="font-semibold">{children}</strong>
+										),
+										em: ({ children }) => (
+											<em className="italic">{children}</em>
+										),
+										h1: ({ children }) => (
+											<p className="font-semibold mb-1">{children}</p>
+										),
+										h2: ({ children }) => (
+											<p className="font-semibold mb-1">{children}</p>
+										),
+										h3: ({ children }) => (
+											<p className="font-medium mb-1">{children}</p>
+										),
+										code: ({ children }) => (
+											<code className="rounded bg-black/10 dark:bg-white/10 px-1 font-mono text-xs">
+												{children}
+											</code>
+										),
 									}}
 								>
 									{streamingContent}
@@ -423,8 +481,7 @@ Requirements:
 				const existing = getCases();
 				const alreadyExists = existing.some(
 					(c) =>
-						c.title === title &&
-						c.initialPresentation === initialPresentation,
+						c.title === title && c.initialPresentation === initialPresentation,
 				);
 				if (!alreadyExists) {
 					const clinicalCase: ClinicalCase = {
@@ -459,7 +516,12 @@ Requirements:
 					<div className="grid grid-cols-2 gap-3">
 						<div className="flex flex-col gap-1.5">
 							<Label>Specialty</Label>
-							<Select value={specialty} onValueChange={(v) => { if (v) setSpecialty(v); }}>
+							<Select
+								value={specialty}
+								onValueChange={(v) => {
+									if (v) setSpecialty(v);
+								}}
+							>
 								<SelectTrigger>
 									<SelectValue />
 								</SelectTrigger>
@@ -525,12 +587,284 @@ Requirements:
 	);
 }
 
+// ── Clinical case guide ───────────────────────────────────────────────────────
+
+function ClinicalCaseGuide({
+	open,
+	onClose,
+}: {
+	open: boolean;
+	onClose: () => void;
+}) {
+	const [step, setStep] = useState(0);
+
+	const steps = [
+		{
+			icon: <Sparkles size={26} />,
+			iconBg: "bg-blue-500/10 text-blue-500",
+			title: "Generate a case",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						Each case is created on demand by your AI model — no two are the
+						same.
+					</p>
+					<div className="grid gap-2">
+						{[
+							{
+								label: "Specialty",
+								desc: "Target a system you're weak on — Cardiology, Neuro, OB/GYN, and more.",
+							},
+							{
+								label: "Difficulty",
+								desc: "Easy for concept review, Medium for standard exam prep, Hard for high-stakes simulation.",
+							},
+							{
+								label: "Focus (optional)",
+								desc: 'Narrow the topic further, e.g. "chest pain" or "altered mental status".',
+							},
+						].map((item) => (
+							<div
+								key={item.label}
+								className="flex items-start gap-3 rounded-lg border bg-muted/30 p-3"
+							>
+								<div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded bg-muted text-xs font-bold">
+									{item.label[0]}
+								</div>
+								<div>
+									<p className="text-sm font-medium">{item.label}</p>
+									<p className="text-xs text-muted-foreground mt-0.5">
+										{item.desc}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			),
+		},
+		{
+			icon: <Stethoscope size={26} />,
+			iconBg: "bg-teal-500/10 text-teal-600",
+			title: "Work it like a real encounter",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						The AI plays the attending. You're the clerk or resident — gather
+						information and reason through the diagnosis.
+					</p>
+					<div className="rounded-lg border bg-muted/30 p-4 space-y-3">
+						{[
+							"Read the opening presentation",
+							"Request vitals, labs, or imaging",
+							"State your differential diagnosis",
+							"Propose a management plan",
+						].map((text, i) => (
+							<div key={text} className="flex items-center gap-3 text-sm">
+								<span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-[11px] font-bold">
+									{i + 1}
+								</span>
+								<span>{text}</span>
+							</div>
+						))}
+					</div>
+					<p className="text-xs text-muted-foreground bg-muted/50 rounded-lg p-3 leading-relaxed">
+						Tip: the attending won't volunteer information — you have to ask,
+						just like a real clinical encounter.
+					</p>
+				</div>
+			),
+		},
+		{
+			icon: <Brain size={26} />,
+			iconBg: "bg-yellow-500/10 text-yellow-600",
+			title: "Difficulty levels",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						Match the difficulty to where you are in your prep.
+					</p>
+					<div className="grid gap-2">
+						{[
+							{
+								label: "Easy",
+								color: "border-green-300 text-green-600",
+								desc: "Classic presentations, single diagnosis, straightforward management.",
+							},
+							{
+								label: "Medium",
+								color: "border-yellow-300 text-yellow-600",
+								desc: "Atypical findings, common mimics, requires a broad differential.",
+							},
+							{
+								label: "Hard",
+								color: "border-red-300 text-red-600",
+								desc: "Rare conditions, complicating comorbidities, high-stakes decisions.",
+							},
+						].map((d) => (
+							<div
+								key={d.label}
+								className="flex items-center gap-3 rounded-lg border p-2.5"
+							>
+								<span
+									className={cn(
+										"rounded border px-2 py-0.5 text-xs font-bold shrink-0",
+										d.color,
+									)}
+								>
+									{d.label}
+								</span>
+								<span className="text-xs text-muted-foreground">{d.desc}</span>
+							</div>
+						))}
+					</div>
+				</div>
+			),
+		},
+		{
+			icon: <Check size={26} />,
+			iconBg: "bg-green-500/10 text-green-600",
+			title: "Mark it done",
+			content: (
+				<div className="space-y-3">
+					<p className="text-sm text-muted-foreground">
+						Once you've reached a diagnosis and management plan, mark the case
+						complete.
+					</p>
+					<div className="grid gap-2">
+						{[
+							{
+								label: "Mark done",
+								desc: "Closes the active case and moves it to your Completed list for future reference.",
+							},
+							{
+								label: "Reopen",
+								desc: "Changed your mind? Reopen any completed case to continue the conversation.",
+							},
+							{
+								label: "Delete",
+								desc: "Remove cases you no longer need. Your case library stays clean and focused.",
+							},
+						].map((item) => (
+							<div
+								key={item.label}
+								className="flex items-start gap-3 rounded-lg border bg-muted/30 p-3"
+							>
+								<div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded bg-muted text-xs font-bold">
+									{item.label[0]}
+								</div>
+								<div>
+									<p className="text-sm font-medium">{item.label}</p>
+									<p className="text-xs text-muted-foreground mt-0.5">
+										{item.desc}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			),
+		},
+	];
+
+	const current = steps[step];
+	const isLast = step === steps.length - 1;
+
+	return (
+		<Dialog
+			open={open}
+			onOpenChange={(isOpen) => {
+				if (!isOpen) onClose();
+			}}
+		>
+			<DialogContent className="max-w-md">
+				{/* Step dots */}
+				<div className="flex justify-center gap-1.5 mt-1">
+					{steps.map((s, i) => (
+						<button
+							key={s.title}
+							type="button"
+							onClick={() => setStep(i)}
+							aria-label={`Step ${i + 1}`}
+							className={cn(
+								"h-1.5 rounded-full transition-all duration-200",
+								i === step
+									? "w-6 bg-primary"
+									: "w-1.5 bg-muted-foreground/25 hover:bg-muted-foreground/50",
+							)}
+						/>
+					))}
+				</div>
+
+				{/* Icon + Title */}
+				<div className="flex flex-col items-center text-center gap-3 mt-4">
+					<div
+						className={cn(
+							"flex size-14 items-center justify-center rounded-2xl",
+							current.iconBg,
+						)}
+					>
+						{current.icon}
+					</div>
+					<DialogTitle className="text-xl">{current.title}</DialogTitle>
+				</div>
+
+				{/* Step content */}
+				<div className="mt-1">{current.content}</div>
+
+				{/* Navigation */}
+				<div className="flex items-center justify-between mt-4 pt-4 border-t">
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={() => setStep((s) => s - 1)}
+						disabled={step === 0}
+						className="w-20"
+					>
+						<ChevronLeft size={14} className="mr-1" />
+						Back
+					</Button>
+					<span className="text-xs text-muted-foreground">
+						{step + 1} / {steps.length}
+					</span>
+					{isLast ? (
+						<Button size="sm" onClick={onClose} className="w-20">
+							Got it!
+						</Button>
+					) : (
+						<Button
+							size="sm"
+							onClick={() => setStep((s) => s + 1)}
+							className="w-20"
+						>
+							Next
+							<ChevronRight size={14} className="ml-1" />
+						</Button>
+					)}
+				</div>
+			</DialogContent>
+		</Dialog>
+	);
+}
+
 // ── Main page ─────────────────────────────────────────────────────────────────
 
 export function CasesPage() {
 	const [cases, setCases] = useState<ClinicalCase[]>(() => getCases());
 	const [creating, setCreating] = useState(false);
 	const [activeCase, setActiveCase] = useState<ClinicalCase | null>(null);
+	const [showGuide, setShowGuide] = useState(
+		() => !localStorage.getItem(GUIDE_KEY),
+	);
+
+	function openGuide() {
+		setShowGuide(true);
+	}
+
+	function closeGuide() {
+		localStorage.setItem(GUIDE_KEY, "1");
+		setShowGuide(false);
+	}
 
 	function refresh() {
 		setCases(getCases());
@@ -567,10 +901,21 @@ export function CasesPage() {
 						{active.length} active · {completed.length} completed
 					</p>
 				</div>
-				<Button onClick={() => setCreating(true)}>
-					<Sparkles size={14} className="mr-2" />
-					Generate case
-				</Button>
+				<div className="flex items-center gap-2">
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={openGuide}
+						className="h-8 w-8 text-muted-foreground"
+						title="How it works"
+					>
+						<CircleHelp size={15} />
+					</Button>
+					<Button onClick={() => setCreating(true)}>
+						<Sparkles size={14} className="mr-2" />
+						Generate case
+					</Button>
+				</div>
 			</div>
 
 			<AiDisclaimer storageKey="aimed:cases-disclaimer-seen" />
@@ -703,6 +1048,11 @@ export function CasesPage() {
 					setCreating(false);
 					refresh();
 				}}
+			/>
+			<ClinicalCaseGuide
+				key={String(showGuide)}
+				open={showGuide}
+				onClose={closeGuide}
 			/>
 		</div>
 	);

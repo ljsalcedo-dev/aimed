@@ -13,7 +13,7 @@ import {
 	Trash2,
 	X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -122,11 +122,16 @@ function SrsDistribution({ cards }: { cards: Flashcard[] }) {
 	const total = cards.length;
 	// Group boundaries match the STAGE_THRESHOLDS in sm2.ts (days of stability)
 	const groups = [
-		{ label: "Clerkship",       minS: 0,   maxS: 14,       bgClass: "bg-sky-500" },
-		{ label: "Resident",        minS: 14,  maxS: 90,       bgClass: "bg-teal-600" },
-		{ label: "Fellow",          minS: 90,  maxS: 180,      bgClass: "bg-indigo-500" },
-		{ label: "Attending",       minS: 180, maxS: 365,      bgClass: "bg-violet-600" },
-		{ label: "Board-Certified", minS: 365, maxS: Infinity, bgClass: "bg-purple-700" },
+		{ label: "Clerkship", minS: 0, maxS: 14, bgClass: "bg-sky-500" },
+		{ label: "Resident", minS: 14, maxS: 90, bgClass: "bg-teal-600" },
+		{ label: "Fellow", minS: 90, maxS: 180, bgClass: "bg-indigo-500" },
+		{ label: "Attending", minS: 180, maxS: 365, bgClass: "bg-violet-600" },
+		{
+			label: "Board-Certified",
+			minS: 365,
+			maxS: Infinity,
+			bgClass: "bg-purple-700",
+		},
 	];
 
 	const counts = groups.map((g) => ({
@@ -255,7 +260,9 @@ function ReviewMode({
 				<div className="grid grid-cols-3 gap-4 w-full">
 					<div className="rounded-xl border p-4">
 						<p className="text-3xl font-bold">{correctCount}</p>
-						<p className="text-xs text-muted-foreground mt-1">Correct first try</p>
+						<p className="text-xs text-muted-foreground mt-1">
+							Correct first try
+						</p>
 					</div>
 					<div className="rounded-xl border p-4">
 						<p className="text-3xl font-bold">{pct}%</p>
@@ -298,7 +305,8 @@ function ReviewMode({
 					{results.length} / {totalUnique}
 					{queueExtra > 0 && (
 						<span className="text-muted-foreground/60">
-							{" "}· {queueExtra} requeued
+							{" "}
+							· {queueExtra} requeued
 						</span>
 					)}
 				</span>
@@ -395,7 +403,9 @@ function CreateCardDialog({
 	const [category, setCategory] = useState("General");
 	const [topic, setTopic] = useState("");
 	const [generating, setGenerating] = useState(false);
-	const [customCats, setCustomCats] = useState<string[]>(() => getCustomCategories());
+	const [customCats, setCustomCats] = useState<string[]>(() =>
+		getCustomCategories(),
+	);
 	const [addingCustom, setAddingCustom] = useState(false);
 	const [customInput, setCustomInput] = useState("");
 
@@ -516,7 +526,12 @@ BACK: [answer or explanation]`,
 					<div className="flex flex-col gap-1.5">
 						<Label>Category</Label>
 						<div className="flex items-center gap-2">
-							<Select value={category} onValueChange={(val) => { if (val) setCategory(val); }}>
+							<Select
+								value={category}
+								onValueChange={(val) => {
+									if (val) setCategory(val);
+								}}
+							>
 								<SelectTrigger className="flex-1">
 									<SelectValue />
 								</SelectTrigger>
@@ -661,10 +676,6 @@ function FlashcardGuide({
 }) {
 	const [step, setStep] = useState(0);
 
-	useEffect(() => {
-		if (open) setStep(0);
-	}, [open]);
-
 	const steps = [
 		{
 			icon: <BookOpen size={26} />,
@@ -720,7 +731,7 @@ function FlashcardGuide({
 							"Tap the card to reveal",
 							"Rate how well you recalled it",
 						].map((text, i) => (
-							<div key={i} className="flex items-center gap-3 text-sm">
+							<div key={text} className="flex items-center gap-3 text-sm">
 								<span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-[11px] font-bold">
 									{i + 1}
 								</span>
@@ -829,13 +840,18 @@ function FlashcardGuide({
 	const isLast = step === steps.length - 1;
 
 	return (
-		<Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
+		<Dialog
+			open={open}
+			onOpenChange={(isOpen) => {
+				if (!isOpen) onClose();
+			}}
+		>
 			<DialogContent className="max-w-md">
 				{/* Step dots */}
 				<div className="flex justify-center gap-1.5 mt-1">
-					{steps.map((_, i) => (
+					{steps.map((s, i) => (
 						<button
-							key={i}
+							key={s.title}
 							type="button"
 							onClick={() => setStep(i)}
 							aria-label={`Step ${i + 1}`}
@@ -1045,7 +1061,9 @@ export function FlashcardsPage() {
 					<ScrollArea className="flex-1 px-6">
 						{displayed.length === 0 ? (
 							<div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-								<p className="text-muted-foreground text-sm">No flashcards yet</p>
+								<p className="text-muted-foreground text-sm">
+									No flashcards yet
+								</p>
 								<Button onClick={() => setCreating(true)} variant="outline">
 									<Sparkles size={14} className="mr-2" />
 									Generate with AI
@@ -1063,10 +1081,7 @@ export function FlashcardsPage() {
 									>
 										<CardHeader className="pb-2">
 											<div className="flex items-start justify-between gap-2">
-												<Badge
-													variant="secondary"
-													className="text-xs shrink-0"
-												>
+												<Badge variant="secondary" className="text-xs shrink-0">
 													{card.category}
 												</Badge>
 												<button
@@ -1091,7 +1106,13 @@ export function FlashcardsPage() {
 														Due now
 													</span>
 												) : (
-													new Date(card.dueDate).toLocaleString([], { month: "numeric", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" })
+													new Date(card.dueDate).toLocaleString([], {
+														month: "numeric",
+														day: "numeric",
+														year: "numeric",
+														hour: "2-digit",
+														minute: "2-digit",
+													})
 												)}
 											</span>
 										</CardFooter>
@@ -1115,7 +1136,10 @@ export function FlashcardsPage() {
 						) : (
 							<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 p-1">
 								{dueCards.map((card) => (
-									<Card key={card.id} className="ring-1 ring-primary/40 flex flex-col">
+									<Card
+										key={card.id}
+										className="ring-1 ring-primary/40 flex flex-col"
+									>
 										<CardHeader className="pb-2">
 											<Badge variant="secondary" className="w-fit text-xs">
 												{card.category}
@@ -1144,7 +1168,11 @@ export function FlashcardsPage() {
 					refresh();
 				}}
 			/>
-			<FlashcardGuide open={showGuide} onClose={closeGuide} />
+			<FlashcardGuide
+				key={String(showGuide)}
+				open={showGuide}
+				onClose={closeGuide}
+			/>
 		</div>
 	);
 }
