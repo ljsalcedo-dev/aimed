@@ -1,6 +1,7 @@
 import {
 	BookOpen,
 	BrainCircuit,
+	Cloud,
 	FlaskConical,
 	MessageSquare,
 	Settings,
@@ -8,6 +9,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { getSettings } from "@/lib/storage";
 
 const NAV = [
 	{ to: "/chat", icon: MessageSquare, label: "Chat" },
@@ -16,6 +18,10 @@ const NAV = [
 ];
 
 export function Sidebar({ onClose }: { onClose?: () => void }) {
+	const settings = getSettings();
+	const isCloud = settings.mode === "cloud";
+	const model = isCloud ? settings.cloud.model : settings.ollama.model;
+
 	return (
 		<aside className="flex h-full w-56 flex-col border-r bg-sidebar">
 			{/* Brand */}
@@ -25,7 +31,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
 				</div>
 				<div className="leading-none">
 					<p className="font-semibold text-sm text-sidebar-foreground">aimed</p>
-					<p className="text-xs text-muted-foreground">Medical Review App using MedGemma AI Model</p>
+					<p className="text-xs text-muted-foreground">Medical Review App using AI Models</p>
 				</div>
 			</div>
 
@@ -72,10 +78,21 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
 				</div>
 			</nav>
 
-			{/* Status dot */}
-			<div className="flex items-center gap-2 px-4 py-3 border-t">
-				<FlaskConical size={14} className="text-muted-foreground" />
-				<span className="text-xs text-muted-foreground">MedGemma 1.5</span>
+			{/* Model status */}
+			<div className="flex items-center gap-2 px-4 py-3 border-t min-w-0">
+				{isCloud ? (
+					<Cloud size={14} className="text-muted-foreground shrink-0" />
+				) : (
+					<FlaskConical size={14} className="text-muted-foreground shrink-0" />
+				)}
+				<div className="flex flex-col min-w-0">
+					<span className="text-xs text-muted-foreground leading-none">
+						{isCloud ? "Cloud" : "Local"}
+					</span>
+					<span className="text-xs text-muted-foreground/60 truncate leading-none mt-0.5">
+						{model}
+					</span>
+				</div>
 			</div>
 		</aside>
 	);
