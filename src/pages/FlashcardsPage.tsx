@@ -31,15 +31,29 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectSeparator,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { streamChat } from "@/lib/ollama";
 import { applyReview, getSrsStage, isDue, newCard } from "@/lib/sm2";
 import {
+	deleteCustomCategory,
 	deleteFlashcard,
 	generateId,
+	getCustomCategories,
 	getFlashcards,
 	getStats,
+	reassignFlashcardCategory,
+	saveCustomCategory,
 	saveFlashcard,
 	updateStats,
 } from "@/lib/storage";
@@ -381,6 +395,35 @@ function CreateCardDialog({
 	const [category, setCategory] = useState("General");
 	const [topic, setTopic] = useState("");
 	const [generating, setGenerating] = useState(false);
+	const [customCats, setCustomCats] = useState<string[]>(() => getCustomCategories());
+	const [addingCustom, setAddingCustom] = useState(false);
+	const [customInput, setCustomInput] = useState("");
+
+	function applyCustom() {
+		const val = customInput.trim();
+		if (val) {
+			setCategory(val);
+			if (!CATEGORIES.includes(val) && !customCats.includes(val)) {
+				saveCustomCategory(val);
+				setCustomCats((prev) => [...prev, val]);
+			}
+		}
+		setAddingCustom(false);
+		setCustomInput("");
+	}
+
+	function removeCustomTag(cat: string) {
+		const affected = getFlashcards().filter((c) => c.category === cat).length;
+		const msg =
+			affected > 0
+				? `Remove tag "${cat}"? ${affected} card${affected !== 1 ? "s" : ""} will be reassigned to General.`
+				: `Remove tag "${cat}"?`;
+		if (!window.confirm(msg)) return;
+		deleteCustomCategory(cat);
+		if (affected > 0) reassignFlashcardCategory(cat, "General");
+		setCustomCats((prev) => prev.filter((c) => c !== cat));
+		if (category === cat) setCategory("General");
+	}
 
 	async function generate() {
 		if (!topic.trim()) return;
@@ -433,6 +476,8 @@ BACK: [answer or explanation]`,
 		setBack("");
 		setTopic("");
 		setCategory("General");
+		setAddingCustom(false);
+		setCustomInput("");
 		onClose();
 	}
 
@@ -467,22 +512,108 @@ BACK: [answer or explanation]`,
 						</Button>
 					</div>
 
-					<div className="grid grid-cols-4 gap-2">
-						{CATEGORIES.slice(0, 8).map((cat) => (
-							<button
-								key={cat}
-								type="button"
-								onClick={() => setCategory(cat)}
-								className={cn(
-									"rounded-md px-2 py-1 text-xs border transition-colors",
-									category === cat
-										? "bg-primary text-primary-foreground border-primary"
-										: "hover:bg-muted",
-								)}
-							>
-								{cat}
-							</button>
-						))}
+					{/* Category */}
+					<div className="flex flex-col gap-1.5">
+						<Label>Category</Label>
+						<div className="flex items-center gap-2">
+							<Select value={category} onValueChange={(val) => { if (val) setCategory(val); }}>
+								<SelectTrigger className="flex-1">
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent align="start">
+									<SelectGroup>
+										<SelectLabel>Preset</SelectLabel>
+										{CATEGORIES.map((cat) => (
+											<SelectItem key={cat} value={cat}>
+												{cat}
+											</SelectItem>
+										))}
+									</SelectGroup>
+									{customCats.length > 0 && (
+										<>
+											<SelectSeparator />
+											<SelectGroup>
+												<SelectLabel>Custom</SelectLabel>
+												{customCats.map((cat) => (
+													<SelectItem key={cat} value={cat}>
+														{cat}
+													</SelectItem>
+												))}
+											</SelectGroup>
+										</>
+									)}
+								</SelectContent>
+							</Select>
+							{addingCustom ? (
+								<div className="flex items-center gap-1">
+									<Input
+										autoFocus
+										className="h-8 w-36 text-sm"
+										placeholder="Tag name…"
+										value={customInput}
+										onChange={(e) => setCustomInput(e.target.value)}
+										onKeyDown={(e) => {
+											if (e.key === "Enter") applyCustom();
+											if (e.key === "Escape") {
+												setAddingCustom(false);
+												setCustomInput("");
+											}
+										}}
+									/>
+									<Button
+										type="button"
+										size="icon"
+										variant="ghost"
+										className="h-8 w-8 shrink-0"
+										onClick={applyCustom}
+									>
+										<Check size={14} />
+									</Button>
+									<Button
+										type="button"
+										size="icon"
+										variant="ghost"
+										className="h-8 w-8 shrink-0 text-muted-foreground"
+										onClick={() => {
+											setAddingCustom(false);
+											setCustomInput("");
+										}}
+									>
+										<X size={14} />
+									</Button>
+								</div>
+							) : (
+								<Button
+									type="button"
+									variant="outline"
+									className="h-8 shrink-0 text-xs px-3"
+									onClick={() => setAddingCustom(true)}
+								>
+									<Plus size={12} className="mr-1" />
+									Add tag
+								</Button>
+							)}
+						</div>
+						{customCats.length > 0 && (
+							<div className="flex flex-wrap gap-1.5 mt-1.5">
+								{customCats.map((cat) => (
+									<span
+										key={cat}
+										className="inline-flex items-center gap-1 rounded-full border bg-muted/50 px-2.5 py-0.5 text-xs"
+									>
+										{cat}
+										<button
+											type="button"
+											onClick={() => removeCustomTag(cat)}
+											className="text-muted-foreground hover:text-destructive transition-colors ml-0.5"
+											aria-label={`Remove ${cat} tag`}
+										>
+											<X size={11} />
+										</button>
+									</span>
+								))}
+							</div>
+						)}
 					</div>
 
 					<div className="flex flex-col gap-1.5">

@@ -14,6 +14,7 @@ const KEYS = {
 	DECKS: "aimed:decks",
 	CASES: "aimed:cases",
 	STATS: "aimed:stats",
+	CUSTOM_CATEGORIES: "aimed:custom-categories",
 } as const;
 
 function read<T>(key: string, fallback: T): T {
@@ -158,6 +159,30 @@ export function getStats(): StudyStats {
 
 export function updateStats(patch: Partial<StudyStats>): void {
 	write(KEYS.STATS, { ...getStats(), ...patch });
+}
+
+// ── Custom categories ────────────────────────────────────────────────────────
+
+export function getCustomCategories(): string[] {
+	return read<string[]>(KEYS.CUSTOM_CATEGORIES, []);
+}
+
+export function saveCustomCategory(cat: string): void {
+	const existing = getCustomCategories();
+	if (!existing.includes(cat)) {
+		write(KEYS.CUSTOM_CATEGORIES, [...existing, cat]);
+	}
+}
+
+export function deleteCustomCategory(cat: string): void {
+	write(KEYS.CUSTOM_CATEGORIES, getCustomCategories().filter((c) => c !== cat));
+}
+
+export function reassignFlashcardCategory(from: string, to: string): void {
+	const cards = getFlashcards().map((c) =>
+		c.category === from ? { ...c, category: to } : c,
+	);
+	write(KEYS.FLASHCARDS, cards);
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
