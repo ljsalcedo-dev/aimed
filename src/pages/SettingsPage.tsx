@@ -449,7 +449,7 @@ export function SettingsPage() {
 					<CardContent className="flex flex-col gap-2 text-sm text-muted-foreground">
 						<div className="flex items-center gap-2">
 							<span>aimed</span>
-							<Badge variant="secondary">v1.0.0</Badge>
+							<Badge variant="secondary">v1.1.0</Badge>
 						</div>
 						<p>
 							AI-powered medical exam review. Local mode uses MedGemma via
