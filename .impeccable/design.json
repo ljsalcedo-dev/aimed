@@ -1,289 +1,314 @@
 {
-  "schemaVersion": 2,
-  "generatedAt": "2026-05-16T00:00:00Z",
-  "title": "Design System: aimed",
-  "extensions": {
-    "colorMeta": {
-      "surface-base": {
-        "role": "neutral",
-        "displayName": "Clean Canvas",
-        "canonical": "oklch(1 0 0)",
-        "tonalRamp": [
-          "oklch(0.10 0 0)",
-          "oklch(0.20 0 0)",
-          "oklch(0.40 0 0)",
-          "oklch(0.60 0 0)",
-          "oklch(0.75 0 0)",
-          "oklch(0.87 0 0)",
-          "oklch(0.95 0 0)",
-          "oklch(1 0 0)"
-        ]
-      },
-      "surface-sidebar": {
-        "role": "neutral",
-        "displayName": "Quiet Linen",
-        "canonical": "oklch(0.985 0 0)",
-        "tonalRamp": [
-          "oklch(0.10 0 0)",
-          "oklch(0.20 0 0)",
-          "oklch(0.40 0 0)",
-          "oklch(0.60 0 0)",
-          "oklch(0.75 0 0)",
-          "oklch(0.87 0 0)",
-          "oklch(0.95 0 0)",
-          "oklch(0.985 0 0)"
-        ]
-      },
-      "surface-muted": {
-        "role": "neutral",
-        "displayName": "Soft Ash",
-        "canonical": "oklch(0.97 0 0)",
-        "tonalRamp": [
-          "oklch(0.10 0 0)",
-          "oklch(0.20 0 0)",
-          "oklch(0.40 0 0)",
-          "oklch(0.60 0 0)",
-          "oklch(0.75 0 0)",
-          "oklch(0.87 0 0)",
-          "oklch(0.97 0 0)",
-          "oklch(1 0 0)"
-        ]
-      },
-      "foreground-strong": {
-        "role": "neutral",
-        "displayName": "Deep Charcoal",
-        "canonical": "oklch(0.145 0 0)",
-        "tonalRamp": [
-          "oklch(0.10 0 0)",
-          "oklch(0.145 0 0)",
-          "oklch(0.25 0 0)",
-          "oklch(0.40 0 0)",
-          "oklch(0.55 0 0)",
-          "oklch(0.70 0 0)",
-          "oklch(0.85 0 0)",
-          "oklch(0.95 0 0)"
-        ]
-      },
-      "foreground-primary": {
-        "role": "neutral",
-        "displayName": "Dense Graphite",
-        "canonical": "oklch(0.205 0 0)",
-        "tonalRamp": [
-          "oklch(0.10 0 0)",
-          "oklch(0.205 0 0)",
-          "oklch(0.30 0 0)",
-          "oklch(0.45 0 0)",
-          "oklch(0.60 0 0)",
-          "oklch(0.75 0 0)",
-          "oklch(0.87 0 0)",
-          "oklch(0.95 0 0)"
-        ]
-      },
-      "foreground-muted": {
-        "role": "neutral",
-        "displayName": "Pale Ink",
-        "canonical": "oklch(0.556 0 0)",
-        "tonalRamp": [
-          "oklch(0.15 0 0)",
-          "oklch(0.25 0 0)",
-          "oklch(0.40 0 0)",
-          "oklch(0.556 0 0)",
-          "oklch(0.65 0 0)",
-          "oklch(0.75 0 0)",
-          "oklch(0.85 0 0)",
-          "oklch(0.95 0 0)"
-        ]
-      },
-      "border-default": {
-        "role": "neutral",
-        "displayName": "Light Chalk",
-        "canonical": "oklch(0.922 0 0)",
-        "tonalRamp": [
-          "oklch(0.30 0 0)",
-          "oklch(0.45 0 0)",
-          "oklch(0.60 0 0)",
-          "oklch(0.75 0 0)",
-          "oklch(0.87 0 0)",
-          "oklch(0.922 0 0)",
-          "oklch(0.96 0 0)",
-          "oklch(1 0 0)"
-        ]
-      },
-      "interactive-accent": {
-        "role": "primary",
-        "displayName": "Scholar Blue",
-        "canonical": "oklch(0.48 0.10 264)",
-        "tonalRamp": [
-          "oklch(0.20 0.08 264)",
-          "oklch(0.30 0.10 264)",
-          "oklch(0.40 0.10 264)",
-          "oklch(0.48 0.10 264)",
-          "oklch(0.58 0.09 264)",
-          "oklch(0.68 0.08 264)",
-          "oklch(0.78 0.06 264)",
-          "oklch(0.90 0.03 264)"
-        ]
-      },
-      "interactive-accent-dark": {
-        "role": "primary",
-        "displayName": "Scholar Blue (Dark)",
-        "canonical": "oklch(0.488 0.243 264.376)",
-        "tonalRamp": [
-          "oklch(0.20 0.15 264)",
-          "oklch(0.30 0.20 264)",
-          "oklch(0.40 0.23 264)",
-          "oklch(0.488 0.243 264)",
-          "oklch(0.60 0.22 264)",
-          "oklch(0.70 0.18 264)",
-          "oklch(0.80 0.12 264)",
-          "oklch(0.92 0.05 264)"
-        ]
-      },
-      "destructive": {
-        "role": "semantic",
-        "displayName": "Clinical Red",
-        "canonical": "oklch(0.577 0.245 27.325)",
-        "tonalRamp": [
-          "oklch(0.22 0.15 27)",
-          "oklch(0.32 0.20 27)",
-          "oklch(0.44 0.23 27)",
-          "oklch(0.577 0.245 27)",
-          "oklch(0.65 0.22 27)",
-          "oklch(0.75 0.18 27)",
-          "oklch(0.85 0.12 27)",
-          "oklch(0.93 0.05 27)"
-        ]
-      }
-    },
-    "typographyMeta": {
-      "title": { "displayName": "Title", "purpose": "Page headings and top-level section names. One per page region." },
-      "body": { "displayName": "Body", "purpose": "Chat messages, flashcard content, case narration. The dominant text size. Max 65–75ch." },
-      "label": { "displayName": "Label", "purpose": "Sidebar category headings, column headers. Uppercase, letter-spaced. Non-interactive context only." }
-    },
-    "shadows": [
-      {
-        "name": "modal-lift",
-        "value": "0 8px 32px oklch(0 0 0 / 0.12)",
-        "purpose": "Reserved for Dialog/modal components only. Applied by shadcn; do not add to custom surfaces."
-      }
-    ],
-    "motion": [
-      {
-        "name": "ease-standard",
-        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
-        "purpose": "Default easing for all state transitions (background, border, opacity)."
-      },
-      {
-        "name": "duration-fast",
-        "value": "150ms",
-        "purpose": "Button hover, nav item hover, input focus — immediate-feeling micro-interactions."
-      },
-      {
-        "name": "duration-standard",
-        "value": "200ms",
-        "purpose": "Dialog open/close, panel transitions."
-      }
-    ],
-    "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" }
-    ]
-  },
-  "components": [
-    {
-      "name": "Primary Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Default call-to-action. Used for send, save, generate, and create actions.",
-      "html": "<button class=\"ds-btn-primary\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:6px\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"/><polygon points=\"22 2 15 22 11 13 2 9 22 2\"/></svg>Send</button>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; background-color: oklch(0.205 0 0); color: oklch(1 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Variable', sans-serif; border-radius: 0.5rem; padding: 0.5rem 1rem; border: none; cursor: pointer; height: 2.25rem; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background-color: oklch(0.145 0 0); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.708 0 0); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }"
-    },
-    {
-      "name": "Ghost Button",
-      "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "Low-emphasis action. Used for secondary nav actions, inline toggles, and icon-only controls.",
-      "html": "<button class=\"ds-btn-ghost\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:6px\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg>New Chat</button>",
-      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; background-color: transparent; color: oklch(0.205 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Variable', sans-serif; border-radius: 0.5rem; padding: 0.5rem 1rem; border: none; cursor: pointer; height: 2.25rem; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background-color: oklch(0.97 0 0); } .ds-btn-ghost:focus-visible { outline: 2px solid oklch(0.708 0 0); outline-offset: 2px; }"
-    },
-    {
-      "name": "Text Input",
-      "kind": "input",
-      "refersTo": "input-default",
-      "description": "Single-line field for URLs, search, and configuration values. Stroked, not filled.",
-      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"http://localhost:11434\" />",
-      "css": ".ds-input { display: flex; width: 100%; background-color: oklch(1 0 0); color: oklch(0.145 0 0); border: 1px solid oklch(0.922 0 0); border-radius: 0.5rem; padding: 0.375rem 0.75rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; line-height: 1.625; outline: none; height: 2.25rem; transition: border-color 150ms, box-shadow 150ms; } .ds-input:focus { border-color: oklch(0.708 0 0); box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.25); } .ds-input::placeholder { color: oklch(0.556 0 0); } .ds-input:disabled { opacity: 0.5; cursor: not-allowed; }"
-    },
-    {
-      "name": "Nav Item (Active)",
-      "kind": "nav",
-      "refersTo": "nav-item-active",
-      "description": "Sidebar navigation link. Flat, full-width within the sidebar, rounded corners.",
-      "html": "<div class=\"ds-nav-sidebar\"><a class=\"ds-nav-item\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/></svg>Chat</a><a class=\"ds-nav-item ds-nav-item--active\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/></svg>Flashcards</a><a class=\"ds-nav-item\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 12h-4l-3 9L9 3l-3 9H2\"/></svg>Cases</a></div>",
-      "css": ".ds-nav-sidebar { display: flex; flex-direction: column; gap: 2px; padding: 0.5rem; } .ds-nav-item { display: flex; align-items: center; gap: 0.75rem; border-radius: 0.5rem; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; color: oklch(0.205 0 0); text-decoration: none; transition: background-color 100ms cubic-bezier(0.4,0,0.2,1); cursor: pointer; } .ds-nav-item:hover { background-color: oklch(0.97 0 0 / 0.6); } .ds-nav-item--active { background-color: oklch(0.97 0 0); color: oklch(0.145 0 0); font-weight: 500; }"
-    },
-    {
-      "name": "AI Message Bubble",
-      "kind": "custom",
-      "refersTo": "message-bubble-ai",
-      "description": "MedGemma's response. Soft Ash background, clipped top-left corner marks AI origin.",
-      "html": "<div class=\"ds-bubble-row ds-bubble-row--ai\"><div class=\"ds-bubble-avatar\">M</div><div class=\"ds-bubble ds-bubble--ai\">The most common cause of bacterial endocarditis in IV drug users is <strong>Staphylococcus aureus</strong>, which preferentially affects the <em>tricuspid valve</em>.</div></div>",
-      "css": ".ds-bubble-row { display: flex; gap: 0.75rem; padding: 0.75rem 1rem; } .ds-bubble-row--ai { justify-content: flex-start; } .ds-bubble-row--user { justify-content: flex-end; } .ds-bubble-avatar { display: flex; flex-shrink: 0; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border-radius: 9999px; background-color: oklch(0.205 0 0); color: oklch(0.985 0 0); font-size: 0.75rem; font-weight: 700; font-family: 'Geist Variable', sans-serif; margin-top: 2px; } .ds-bubble { max-width: 80%; padding: 0.75rem 1rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; line-height: 1.625; } .ds-bubble--ai { background-color: oklch(0.97 0 0); color: oklch(0.145 0 0); border-radius: 1.125rem 1.125rem 1.125rem 0.375rem; } .ds-bubble--user { background-color: oklch(0.205 0 0); color: oklch(0.985 0 0); border-radius: 1.125rem 0.375rem 1.125rem 1.125rem; }"
-    },
-    {
-      "name": "User Message Bubble",
-      "kind": "custom",
-      "refersTo": "message-bubble-user",
-      "description": "Student's question. Dense Graphite background, clipped top-right corner marks user origin.",
-      "html": "<div class=\"ds-bubble-row ds-bubble-row--user\"><div class=\"ds-bubble ds-bubble--user\">What are the classic signs of Cushing's syndrome?</div><div class=\"ds-bubble-avatar ds-bubble-avatar--user\">You</div></div>",
-      "css": ".ds-bubble-row { display: flex; gap: 0.75rem; padding: 0.75rem 1rem; } .ds-bubble-row--user { justify-content: flex-end; } .ds-bubble-avatar { display: flex; flex-shrink: 0; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border-radius: 9999px; font-size: 0.6rem; font-weight: 700; font-family: 'Geist Variable', sans-serif; margin-top: 2px; } .ds-bubble-avatar--user { background-color: oklch(0.97 0 0); color: oklch(0.205 0 0); } .ds-bubble { max-width: 80%; padding: 0.75rem 1rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; line-height: 1.625; } .ds-bubble--user { background-color: oklch(0.205 0 0); color: oklch(0.985 0 0); border-radius: 1.125rem 0.375rem 1.125rem 1.125rem; }"
-    },
-    {
-      "name": "Category Badge",
-      "kind": "chip",
-      "refersTo": null,
-      "description": "Flashcard category and specialty tag. Outlined, no fill. Text-only semantic signal.",
-      "html": "<span class=\"ds-badge\">Pharmacology</span>",
-      "css": ".ds-badge { display: inline-flex; align-items: center; border-radius: 9999px; border: 1px solid oklch(0.922 0 0); background-color: transparent; color: oklch(0.205 0 0); padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 500; font-family: 'Geist Variable', sans-serif; white-space: nowrap; }"
-    }
-  ],
-  "narrative": {
-    "northStar": "The Clinical Notebook",
-    "overview": "aimed's design system draws from the discipline of a medical student's annotated notebook: organized, hierarchical, and immediately legible. Every surface earns its presence through function. Color is reserved the way a red pen is in margin notes — rare, meaningful, never decorative. Type scale and spatial rhythm do the work that color might do in lesser systems.\n\nThe dominant material is pure neutral — deep charcoal on clean white in light mode, a near-black surface stack in dark mode. A single cool accent (slate-blue, hue 264) marks interactive state. It appears in under 10% of any surface. Its scarcity makes it trustworthy. When it appears, it means something.\n\nThis system explicitly rejects generic medical-app sterility, SaaS dashboard clichés, gamification, and startup landing-page energy. aimed is a study tool. It does not sell itself.",
-    "keyCharacteristics": [
-      "Flat-by-default: tonal layering creates depth, not shadows",
-      "Single-family typography: Geist Variable throughout, hierarchy through scale and weight alone",
-      "Restrained accent: one cool slate-blue (hue 264), ≤10% of any surface",
-      "Information density: moderate — readable at speed, scannable under exam pressure",
-      "Dark mode is a first-class mode, not an afterthought"
-    ],
-    "rules": [
-      { "name": "The Scarcity Rule", "body": "Scholar Blue appears on ≤10% of any visible surface. It marks interactive affordance. The moment it appears on a heading, a decorative divider, or a background fill, it loses its signal value. Prohibited in those contexts.", "section": "colors" },
-      { "name": "The No-Chroma Expansion Rule", "body": "The neutral ramp does not gain hue over time. No warm off-white backgrounds, no cool blue-gray muted surfaces. If the design feels cold, the fix is structure and spacing, not hue.", "section": "colors" },
-      { "name": "The Single Voice Rule", "body": "Geist Variable is the only typeface in the system. No serif display, no monospace body. If hierarchy feels insufficient, the fix is weight and size contrast — not a second family.", "section": "typography" },
-      { "name": "The Flat-By-Default Rule", "body": "No box-shadow on cards, list items, nav items, or input fields at rest. A shadow on a nav item or card is never intentional. Rewrite with a background-tint or nothing.", "section": "elevation" }
-    ],
-    "dos": [
-      "Do use oklch() for all color values added to the system.",
-      "Do reach for structure — labels, spacing, dividers, weight contrast — before reaching for color.",
-      "Do use Scholar Blue only on interactive affordances: focus rings, active states, primary interactive signals. Hard ceiling at ≤10% of any surface.",
-      "Do clip the origin corner on message bubbles (rounded-tr-sm for user, rounded-tl-sm for AI).",
-      "Do keep body text between 65–75ch line length.",
-      "Do use the uppercase label style (0.75rem, letter-spacing 0.05em) only for non-interactive section category labels.",
-      "Do use Pale Ink for placeholder text, timestamps, captions, and status lines.",
-      "Do respect prefers-reduced-motion. Any animation must have an immediate-state-change equivalent."
-    ],
-    "donts": [
-      "Don't use border-left greater than 1px as a colored accent stripe on cards, list items, or callouts.",
-      "Don't use gradient text (background-clip: text + gradient background).",
-      "Don't use teal/cyan accents (hue 175–200). The accent is hue 264 (slate-blue).",
-      "Don't apply SaaS dashboard patterns: hero metrics, identical icon-grid cards, animated stat counters.",
-      "Don't add gamification elements: streaks, badges, XP counters, star ratings, confetti.",
-      "Don't use startup landing-page patterns inside the app.",
-      "Don't use glassmorphism (backdrop-blur + semi-transparent fills) as decoration.",
-      "Don't use more than one typeface.",
-      "Don't nest cards inside cards."
-    ]
-  }
+	"schemaVersion": 2,
+	"generatedAt": "2026-05-16T00:00:00Z",
+	"title": "Design System: aimed",
+	"extensions": {
+		"colorMeta": {
+			"surface-base": {
+				"role": "neutral",
+				"displayName": "Clean Canvas",
+				"canonical": "oklch(1 0 0)",
+				"tonalRamp": [
+					"oklch(0.10 0 0)",
+					"oklch(0.20 0 0)",
+					"oklch(0.40 0 0)",
+					"oklch(0.60 0 0)",
+					"oklch(0.75 0 0)",
+					"oklch(0.87 0 0)",
+					"oklch(0.95 0 0)",
+					"oklch(1 0 0)"
+				]
+			},
+			"surface-sidebar": {
+				"role": "neutral",
+				"displayName": "Quiet Linen",
+				"canonical": "oklch(0.985 0 0)",
+				"tonalRamp": [
+					"oklch(0.10 0 0)",
+					"oklch(0.20 0 0)",
+					"oklch(0.40 0 0)",
+					"oklch(0.60 0 0)",
+					"oklch(0.75 0 0)",
+					"oklch(0.87 0 0)",
+					"oklch(0.95 0 0)",
+					"oklch(0.985 0 0)"
+				]
+			},
+			"surface-muted": {
+				"role": "neutral",
+				"displayName": "Soft Ash",
+				"canonical": "oklch(0.97 0 0)",
+				"tonalRamp": [
+					"oklch(0.10 0 0)",
+					"oklch(0.20 0 0)",
+					"oklch(0.40 0 0)",
+					"oklch(0.60 0 0)",
+					"oklch(0.75 0 0)",
+					"oklch(0.87 0 0)",
+					"oklch(0.97 0 0)",
+					"oklch(1 0 0)"
+				]
+			},
+			"foreground-strong": {
+				"role": "neutral",
+				"displayName": "Deep Charcoal",
+				"canonical": "oklch(0.145 0 0)",
+				"tonalRamp": [
+					"oklch(0.10 0 0)",
+					"oklch(0.145 0 0)",
+					"oklch(0.25 0 0)",
+					"oklch(0.40 0 0)",
+					"oklch(0.55 0 0)",
+					"oklch(0.70 0 0)",
+					"oklch(0.85 0 0)",
+					"oklch(0.95 0 0)"
+				]
+			},
+			"foreground-primary": {
+				"role": "neutral",
+				"displayName": "Dense Graphite",
+				"canonical": "oklch(0.205 0 0)",
+				"tonalRamp": [
+					"oklch(0.10 0 0)",
+					"oklch(0.205 0 0)",
+					"oklch(0.30 0 0)",
+					"oklch(0.45 0 0)",
+					"oklch(0.60 0 0)",
+					"oklch(0.75 0 0)",
+					"oklch(0.87 0 0)",
+					"oklch(0.95 0 0)"
+				]
+			},
+			"foreground-muted": {
+				"role": "neutral",
+				"displayName": "Pale Ink",
+				"canonical": "oklch(0.556 0 0)",
+				"tonalRamp": [
+					"oklch(0.15 0 0)",
+					"oklch(0.25 0 0)",
+					"oklch(0.40 0 0)",
+					"oklch(0.556 0 0)",
+					"oklch(0.65 0 0)",
+					"oklch(0.75 0 0)",
+					"oklch(0.85 0 0)",
+					"oklch(0.95 0 0)"
+				]
+			},
+			"border-default": {
+				"role": "neutral",
+				"displayName": "Light Chalk",
+				"canonical": "oklch(0.922 0 0)",
+				"tonalRamp": [
+					"oklch(0.30 0 0)",
+					"oklch(0.45 0 0)",
+					"oklch(0.60 0 0)",
+					"oklch(0.75 0 0)",
+					"oklch(0.87 0 0)",
+					"oklch(0.922 0 0)",
+					"oklch(0.96 0 0)",
+					"oklch(1 0 0)"
+				]
+			},
+			"interactive-accent": {
+				"role": "primary",
+				"displayName": "Scholar Blue",
+				"canonical": "oklch(0.48 0.10 264)",
+				"tonalRamp": [
+					"oklch(0.20 0.08 264)",
+					"oklch(0.30 0.10 264)",
+					"oklch(0.40 0.10 264)",
+					"oklch(0.48 0.10 264)",
+					"oklch(0.58 0.09 264)",
+					"oklch(0.68 0.08 264)",
+					"oklch(0.78 0.06 264)",
+					"oklch(0.90 0.03 264)"
+				]
+			},
+			"interactive-accent-dark": {
+				"role": "primary",
+				"displayName": "Scholar Blue (Dark)",
+				"canonical": "oklch(0.488 0.243 264.376)",
+				"tonalRamp": [
+					"oklch(0.20 0.15 264)",
+					"oklch(0.30 0.20 264)",
+					"oklch(0.40 0.23 264)",
+					"oklch(0.488 0.243 264)",
+					"oklch(0.60 0.22 264)",
+					"oklch(0.70 0.18 264)",
+					"oklch(0.80 0.12 264)",
+					"oklch(0.92 0.05 264)"
+				]
+			},
+			"destructive": {
+				"role": "semantic",
+				"displayName": "Clinical Red",
+				"canonical": "oklch(0.577 0.245 27.325)",
+				"tonalRamp": [
+					"oklch(0.22 0.15 27)",
+					"oklch(0.32 0.20 27)",
+					"oklch(0.44 0.23 27)",
+					"oklch(0.577 0.245 27)",
+					"oklch(0.65 0.22 27)",
+					"oklch(0.75 0.18 27)",
+					"oklch(0.85 0.12 27)",
+					"oklch(0.93 0.05 27)"
+				]
+			}
+		},
+		"typographyMeta": {
+			"title": {
+				"displayName": "Title",
+				"purpose": "Page headings and top-level section names. One per page region."
+			},
+			"body": {
+				"displayName": "Body",
+				"purpose": "Chat messages, flashcard content, case narration. The dominant text size. Max 65–75ch."
+			},
+			"label": {
+				"displayName": "Label",
+				"purpose": "Sidebar category headings, column headers. Uppercase, letter-spaced. Non-interactive context only."
+			}
+		},
+		"shadows": [
+			{
+				"name": "modal-lift",
+				"value": "0 8px 32px oklch(0 0 0 / 0.12)",
+				"purpose": "Reserved for Dialog/modal components only. Applied by shadcn; do not add to custom surfaces."
+			}
+		],
+		"motion": [
+			{
+				"name": "ease-standard",
+				"value": "cubic-bezier(0.4, 0, 0.2, 1)",
+				"purpose": "Default easing for all state transitions (background, border, opacity)."
+			},
+			{
+				"name": "duration-fast",
+				"value": "150ms",
+				"purpose": "Button hover, nav item hover, input focus — immediate-feeling micro-interactions."
+			},
+			{
+				"name": "duration-standard",
+				"value": "200ms",
+				"purpose": "Dialog open/close, panel transitions."
+			}
+		],
+		"breakpoints": [
+			{ "name": "sm", "value": "640px" },
+			{ "name": "md", "value": "768px" },
+			{ "name": "lg", "value": "1024px" }
+		]
+	},
+	"components": [
+		{
+			"name": "Primary Button",
+			"kind": "button",
+			"refersTo": "button-primary",
+			"description": "Default call-to-action. Used for send, save, generate, and create actions.",
+			"html": "<button class=\"ds-btn-primary\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:6px\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"/><polygon points=\"22 2 15 22 11 13 2 9 22 2\"/></svg>Send</button>",
+			"css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; background-color: oklch(0.205 0 0); color: oklch(1 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Variable', sans-serif; border-radius: 0.5rem; padding: 0.5rem 1rem; border: none; cursor: pointer; height: 2.25rem; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background-color: oklch(0.145 0 0); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.708 0 0); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }"
+		},
+		{
+			"name": "Ghost Button",
+			"kind": "button",
+			"refersTo": "button-ghost",
+			"description": "Low-emphasis action. Used for secondary nav actions, inline toggles, and icon-only controls.",
+			"html": "<button class=\"ds-btn-ghost\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:6px\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg>New Chat</button>",
+			"css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; background-color: transparent; color: oklch(0.205 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Variable', sans-serif; border-radius: 0.5rem; padding: 0.5rem 1rem; border: none; cursor: pointer; height: 2.25rem; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background-color: oklch(0.97 0 0); } .ds-btn-ghost:focus-visible { outline: 2px solid oklch(0.708 0 0); outline-offset: 2px; }"
+		},
+		{
+			"name": "Text Input",
+			"kind": "input",
+			"refersTo": "input-default",
+			"description": "Single-line field for URLs, search, and configuration values. Stroked, not filled.",
+			"html": "<input class=\"ds-input\" type=\"text\" placeholder=\"http://localhost:11434\" />",
+			"css": ".ds-input { display: flex; width: 100%; background-color: oklch(1 0 0); color: oklch(0.145 0 0); border: 1px solid oklch(0.922 0 0); border-radius: 0.5rem; padding: 0.375rem 0.75rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; line-height: 1.625; outline: none; height: 2.25rem; transition: border-color 150ms, box-shadow 150ms; } .ds-input:focus { border-color: oklch(0.708 0 0); box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.25); } .ds-input::placeholder { color: oklch(0.556 0 0); } .ds-input:disabled { opacity: 0.5; cursor: not-allowed; }"
+		},
+		{
+			"name": "Nav Item (Active)",
+			"kind": "nav",
+			"refersTo": "nav-item-active",
+			"description": "Sidebar navigation link. Flat, full-width within the sidebar, rounded corners.",
+			"html": "<div class=\"ds-nav-sidebar\"><a class=\"ds-nav-item\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/></svg>Chat</a><a class=\"ds-nav-item ds-nav-item--active\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/></svg>Flashcards</a><a class=\"ds-nav-item\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 12h-4l-3 9L9 3l-3 9H2\"/></svg>Cases</a></div>",
+			"css": ".ds-nav-sidebar { display: flex; flex-direction: column; gap: 2px; padding: 0.5rem; } .ds-nav-item { display: flex; align-items: center; gap: 0.75rem; border-radius: 0.5rem; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; color: oklch(0.205 0 0); text-decoration: none; transition: background-color 100ms cubic-bezier(0.4,0,0.2,1); cursor: pointer; } .ds-nav-item:hover { background-color: oklch(0.97 0 0 / 0.6); } .ds-nav-item--active { background-color: oklch(0.97 0 0); color: oklch(0.145 0 0); font-weight: 500; }"
+		},
+		{
+			"name": "AI Message Bubble",
+			"kind": "custom",
+			"refersTo": "message-bubble-ai",
+			"description": "MedGemma's response. Soft Ash background, clipped top-left corner marks AI origin.",
+			"html": "<div class=\"ds-bubble-row ds-bubble-row--ai\"><div class=\"ds-bubble-avatar\">M</div><div class=\"ds-bubble ds-bubble--ai\">The most common cause of bacterial endocarditis in IV drug users is <strong>Staphylococcus aureus</strong>, which preferentially affects the <em>tricuspid valve</em>.</div></div>",
+			"css": ".ds-bubble-row { display: flex; gap: 0.75rem; padding: 0.75rem 1rem; } .ds-bubble-row--ai { justify-content: flex-start; } .ds-bubble-row--user { justify-content: flex-end; } .ds-bubble-avatar { display: flex; flex-shrink: 0; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border-radius: 9999px; background-color: oklch(0.205 0 0); color: oklch(0.985 0 0); font-size: 0.75rem; font-weight: 700; font-family: 'Geist Variable', sans-serif; margin-top: 2px; } .ds-bubble { max-width: 80%; padding: 0.75rem 1rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; line-height: 1.625; } .ds-bubble--ai { background-color: oklch(0.97 0 0); color: oklch(0.145 0 0); border-radius: 1.125rem 1.125rem 1.125rem 0.375rem; } .ds-bubble--user { background-color: oklch(0.205 0 0); color: oklch(0.985 0 0); border-radius: 1.125rem 0.375rem 1.125rem 1.125rem; }"
+		},
+		{
+			"name": "User Message Bubble",
+			"kind": "custom",
+			"refersTo": "message-bubble-user",
+			"description": "Student's question. Dense Graphite background, clipped top-right corner marks user origin.",
+			"html": "<div class=\"ds-bubble-row ds-bubble-row--user\"><div class=\"ds-bubble ds-bubble--user\">What are the classic signs of Cushing's syndrome?</div><div class=\"ds-bubble-avatar ds-bubble-avatar--user\">You</div></div>",
+			"css": ".ds-bubble-row { display: flex; gap: 0.75rem; padding: 0.75rem 1rem; } .ds-bubble-row--user { justify-content: flex-end; } .ds-bubble-avatar { display: flex; flex-shrink: 0; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border-radius: 9999px; font-size: 0.6rem; font-weight: 700; font-family: 'Geist Variable', sans-serif; margin-top: 2px; } .ds-bubble-avatar--user { background-color: oklch(0.97 0 0); color: oklch(0.205 0 0); } .ds-bubble { max-width: 80%; padding: 0.75rem 1rem; font-size: 0.875rem; font-family: 'Geist Variable', sans-serif; line-height: 1.625; } .ds-bubble--user { background-color: oklch(0.205 0 0); color: oklch(0.985 0 0); border-radius: 1.125rem 0.375rem 1.125rem 1.125rem; }"
+		},
+		{
+			"name": "Category Badge",
+			"kind": "chip",
+			"refersTo": null,
+			"description": "Flashcard category and specialty tag. Outlined, no fill. Text-only semantic signal.",
+			"html": "<span class=\"ds-badge\">Pharmacology</span>",
+			"css": ".ds-badge { display: inline-flex; align-items: center; border-radius: 9999px; border: 1px solid oklch(0.922 0 0); background-color: transparent; color: oklch(0.205 0 0); padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 500; font-family: 'Geist Variable', sans-serif; white-space: nowrap; }"
+		}
+	],
+	"narrative": {
+		"northStar": "The Clinical Notebook",
+		"overview": "aimed's design system draws from the discipline of a medical student's annotated notebook: organized, hierarchical, and immediately legible. Every surface earns its presence through function. Color is reserved the way a red pen is in margin notes — rare, meaningful, never decorative. Type scale and spatial rhythm do the work that color might do in lesser systems.\n\nThe dominant material is pure neutral — deep charcoal on clean white in light mode, a near-black surface stack in dark mode. A single cool accent (slate-blue, hue 264) marks interactive state. It appears in under 10% of any surface. Its scarcity makes it trustworthy. When it appears, it means something.\n\nThis system explicitly rejects generic medical-app sterility, SaaS dashboard clichés, gamification, and startup landing-page energy. aimed is a study tool. It does not sell itself.",
+		"keyCharacteristics": [
+			"Flat-by-default: tonal layering creates depth, not shadows",
+			"Single-family typography: Geist Variable throughout, hierarchy through scale and weight alone",
+			"Restrained accent: one cool slate-blue (hue 264), ≤10% of any surface",
+			"Information density: moderate — readable at speed, scannable under exam pressure",
+			"Dark mode is a first-class mode, not an afterthought"
+		],
+		"rules": [
+			{
+				"name": "The Scarcity Rule",
+				"body": "Scholar Blue appears on ≤10% of any visible surface. It marks interactive affordance. The moment it appears on a heading, a decorative divider, or a background fill, it loses its signal value. Prohibited in those contexts.",
+				"section": "colors"
+			},
+			{
+				"name": "The No-Chroma Expansion Rule",
+				"body": "The neutral ramp does not gain hue over time. No warm off-white backgrounds, no cool blue-gray muted surfaces. If the design feels cold, the fix is structure and spacing, not hue.",
+				"section": "colors"
+			},
+			{
+				"name": "The Single Voice Rule",
+				"body": "Geist Variable is the only typeface in the system. No serif display, no monospace body. If hierarchy feels insufficient, the fix is weight and size contrast — not a second family.",
+				"section": "typography"
+			},
+			{
+				"name": "The Flat-By-Default Rule",
+				"body": "No box-shadow on cards, list items, nav items, or input fields at rest. A shadow on a nav item or card is never intentional. Rewrite with a background-tint or nothing.",
+				"section": "elevation"
+			}
+		],
+		"dos": [
+			"Do use oklch() for all color values added to the system.",
+			"Do reach for structure — labels, spacing, dividers, weight contrast — before reaching for color.",
+			"Do use Scholar Blue only on interactive affordances: focus rings, active states, primary interactive signals. Hard ceiling at ≤10% of any surface.",
+			"Do clip the origin corner on message bubbles (rounded-tr-sm for user, rounded-tl-sm for AI).",
+			"Do keep body text between 65–75ch line length.",
+			"Do use the uppercase label style (0.75rem, letter-spacing 0.05em) only for non-interactive section category labels.",
+			"Do use Pale Ink for placeholder text, timestamps, captions, and status lines.",
+			"Do respect prefers-reduced-motion. Any animation must have an immediate-state-change equivalent."
+		],
+		"donts": [
+			"Don't use border-left greater than 1px as a colored accent stripe on cards, list items, or callouts.",
+			"Don't use gradient text (background-clip: text + gradient background).",
+			"Don't use teal/cyan accents (hue 175–200). The accent is hue 264 (slate-blue).",
+			"Don't apply SaaS dashboard patterns: hero metrics, identical icon-grid cards, animated stat counters.",
+			"Don't add gamification elements: streaks, badges, XP counters, star ratings, confetti.",
+			"Don't use startup landing-page patterns inside the app.",
+			"Don't use glassmorphism (backdrop-blur + semi-transparent fills) as decoration.",
+			"Don't use more than one typeface.",
+			"Don't nest cards inside cards."
+		]
+	}
 }

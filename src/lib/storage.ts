@@ -176,7 +176,10 @@ export function saveCustomCategory(cat: string): void {
 }
 
 export function deleteCustomCategory(cat: string): void {
-	write(KEYS.CUSTOM_CATEGORIES, getCustomCategories().filter((c) => c !== cat));
+	write(
+		KEYS.CUSTOM_CATEGORIES,
+		getCustomCategories().filter((c) => c !== cat),
+	);
 }
 
 export function reassignFlashcardCategory(from: string, to: string): void {

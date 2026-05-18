@@ -43,8 +43,22 @@ function CopyBlock({ children }: { children: string }) {
 }
 
 const CLOUD_MODELS = {
-	free: ["gemma3:4b", "gemma3:12b", "llama3.2:3b", "llama3.1:8b", "mistral:7b", "qwen2.5:7b", "phi4"],
-	paid: ["medgemma", "medgemma1.5", "gemma3:27b", "llama3.1:70b", "llama3.1:405b"],
+	free: [
+		"gemma3:4b",
+		"gemma3:12b",
+		"llama3.2:3b",
+		"llama3.1:8b",
+		"mistral:7b",
+		"qwen2.5:7b",
+		"phi4",
+	],
+	paid: [
+		"medgemma",
+		"medgemma1.5",
+		"gemma3:27b",
+		"llama3.1:70b",
+		"llama3.1:405b",
+	],
 };
 
 const LOCAL_MODEL_SUGGESTIONS = [
@@ -82,7 +96,11 @@ export function SettingsPage() {
 		if (!settings.cloud.baseUrl) return;
 		setCloudChecking(true);
 		setCloudConnected(null);
-		const ok = await checkConnection("", settings.cloud.apiKey, settings.cloud.baseUrl);
+		const ok = await checkConnection(
+			"",
+			settings.cloud.apiKey,
+			settings.cloud.baseUrl,
+		);
 		setCloudConnected(ok);
 		setCloudChecking(false);
 	}, [settings.cloud.baseUrl, settings.cloud.apiKey]);
@@ -118,7 +136,12 @@ export function SettingsPage() {
 	const safeSettings = {
 		...settings,
 		mode: settings.mode ?? "local",
-		cloud: settings.cloud ?? { baseUrl: "", model: "", temperature: 0.7, apiKey: "" },
+		cloud: settings.cloud ?? {
+			baseUrl: "",
+			model: "",
+			temperature: 0.7,
+			apiKey: "",
+		},
 	};
 
 	return (
@@ -171,7 +194,9 @@ export function SettingsPage() {
 										</a>
 									</div>
 									<div className="flex flex-col gap-1.5">
-										<p className="text-muted-foreground">2. Pull the model (~5 GB)</p>
+										<p className="text-muted-foreground">
+											2. Pull the model (~5 GB)
+										</p>
 										<CopyBlock>{`ollama pull ${safeSettings.ollama.model}`}</CopyBlock>
 										<p className="text-xs text-muted-foreground">
 											If Ollama doesn't start automatically, also run{" "}
@@ -232,13 +257,17 @@ export function SettingsPage() {
 										<SelectContent>
 											{models.length > 0 ? (
 												models.map((m) => (
-													<SelectItem key={m} value={m}>{m}</SelectItem>
+													<SelectItem key={m} value={m}>
+														{m}
+													</SelectItem>
 												))
 											) : (
 												<SelectGroup>
 													<SelectLabel>Common models</SelectLabel>
 													{LOCAL_MODEL_SUGGESTIONS.map((m) => (
-														<SelectItem key={m} value={m}>{m}</SelectItem>
+														<SelectItem key={m} value={m}>
+															{m}
+														</SelectItem>
 													))}
 												</SelectGroup>
 											)}
@@ -342,13 +371,17 @@ export function SettingsPage() {
 											<SelectGroup>
 												<SelectLabel>Free</SelectLabel>
 												{CLOUD_MODELS.free.map((m) => (
-													<SelectItem key={m} value={m}>{m}</SelectItem>
+													<SelectItem key={m} value={m}>
+														{m}
+													</SelectItem>
 												))}
 											</SelectGroup>
 											<SelectGroup>
 												<SelectLabel>Subscription required</SelectLabel>
 												{CLOUD_MODELS.paid.map((m) => (
-													<SelectItem key={m} value={m}>{m}</SelectItem>
+													<SelectItem key={m} value={m}>
+														{m}
+													</SelectItem>
 												))}
 											</SelectGroup>
 										</SelectContent>

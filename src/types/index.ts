@@ -24,10 +24,10 @@ export interface Flashcard {
 	category: string;
 	tags: string[];
 	// FSRS scheduling
-	stability: number;   // S: days until 90% recall probability
-	difficulty: number;  // D: 1–10 scale (higher = harder to remember)
+	stability: number; // S: days until 90% recall probability
+	difficulty: number; // D: 1–10 scale (higher = harder to remember)
 	// Shared / derived
-	interval: number;    // last scheduled interval in days
+	interval: number; // last scheduled interval in days
 	repetitions: number; // successful review count
 	dueDate: number;
 	createdAt: number;

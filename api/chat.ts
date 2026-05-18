@@ -8,9 +8,11 @@ export default async function handler(req: Request): Promise<Response> {
 	if (!target)
 		return new Response("Missing x-ollama-target header", { status: 400 });
 
-	const headers: Record<string, string> = { "Content-Type": "application/json" };
+	const headers: Record<string, string> = {
+		"Content-Type": "application/json",
+	};
 	const auth = req.headers.get("authorization");
-	if (auth) headers["Authorization"] = auth;
+	if (auth) headers.Authorization = auth;
 
 	const body = await req.text();
 

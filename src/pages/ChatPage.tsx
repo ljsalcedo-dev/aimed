@@ -1,8 +1,8 @@
 import { LayoutList, Plus, Send, Square, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { AiDisclaimer } from "@/components/AiDisclaimer";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { AiDisclaimer } from "@/components/AiDisclaimer";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -65,10 +65,14 @@ function MarkdownContent({ content }: { content: string }) {
 			components={{
 				p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
 				ul: ({ children }) => (
-					<ul className="mb-2 ml-4 list-disc space-y-1 last:mb-0">{children}</ul>
+					<ul className="mb-2 ml-4 list-disc space-y-1 last:mb-0">
+						{children}
+					</ul>
 				),
 				ol: ({ children }) => (
-					<ol className="mb-2 ml-4 list-decimal space-y-1 last:mb-0">{children}</ol>
+					<ol className="mb-2 ml-4 list-decimal space-y-1 last:mb-0">
+						{children}
+					</ol>
 				),
 				li: ({ children }) => <li className="leading-relaxed">{children}</li>,
 				strong: ({ children }) => (
@@ -157,7 +161,9 @@ function StreamingBubble({ partial }: { partial: string }) {
 				{visible ? (
 					<MarkdownContent content={visible} />
 				) : (
-					<span className="text-xs italic text-muted-foreground animate-pulse">Thinking…</span>
+					<span className="text-xs italic text-muted-foreground animate-pulse">
+						Thinking…
+					</span>
 				)}
 			</div>
 		</div>
@@ -283,7 +289,10 @@ export function ChatPage() {
 					size="icon"
 					variant="ghost"
 					className="h-6 w-6 hidden lg:flex"
-					onClick={() => { newSession(); onSelect?.(); }}
+					onClick={() => {
+						newSession();
+						onSelect?.();
+					}}
 				>
 					<Plus size={14} />
 				</Button>
@@ -307,7 +316,10 @@ export function ChatPage() {
 						>
 							<button
 								type="button"
-								onClick={() => { setActiveId(s.id); onSelect?.(); }}
+								onClick={() => {
+									setActiveId(s.id);
+									onSelect?.();
+								}}
 								className="flex-1 min-w-0 truncate text-left px-2 py-2 leading-relaxed"
 							>
 								{s.title}
@@ -353,7 +365,12 @@ export function ChatPage() {
 						<LayoutList size={14} />
 						{activeSession?.title ?? "Sessions"}
 					</Button>
-					<Button size="icon" variant="ghost" className="h-7 w-7" onClick={newSession}>
+					<Button
+						size="icon"
+						variant="ghost"
+						className="h-7 w-7"
+						onClick={newSession}
+					>
 						<Plus size={14} />
 					</Button>
 				</div>

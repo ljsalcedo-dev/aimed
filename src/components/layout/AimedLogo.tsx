@@ -4,10 +4,32 @@ interface AimedLogoProps {
 
 function LogoMark({ size = 32 }: AimedLogoProps) {
 	return (
-		<svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		<svg
+			width={size}
+			height={size}
+			viewBox="0 0 100 100"
+			xmlns="http://www.w3.org/2000/svg"
+			aria-hidden="true"
+		>
 			<rect width="100" height="100" rx="24" fill="#1D9E75" />
-			<line x1="50" y1="19" x2="50" y2="81" stroke="white" strokeWidth="9" strokeLinecap="round" />
-			<line x1="19" y1="50" x2="81" y2="50" stroke="white" strokeWidth="9" strokeLinecap="round" />
+			<line
+				x1="50"
+				y1="19"
+				x2="50"
+				y2="81"
+				stroke="white"
+				strokeWidth="9"
+				strokeLinecap="round"
+			/>
+			<line
+				x1="19"
+				y1="50"
+				x2="81"
+				y2="50"
+				stroke="white"
+				strokeWidth="9"
+				strokeLinecap="round"
+			/>
 			<circle cx="50" cy="19" r="4.5" fill="white" opacity="0.75" />
 			<circle cx="50" cy="81" r="4.5" fill="white" opacity="0.75" />
 			<circle cx="19" cy="50" r="4.5" fill="white" opacity="0.75" />
@@ -17,7 +39,13 @@ function LogoMark({ size = 32 }: AimedLogoProps) {
 	);
 }
 
-export function AimedLogoCompact({ iconSize = 32, textSize = 22 }: { iconSize?: number; textSize?: number }) {
+export function AimedLogoCompact({
+	iconSize = 32,
+	textSize = 22,
+}: {
+	iconSize?: number;
+	textSize?: number;
+}) {
 	return (
 		<div className="flex items-center gap-2.5">
 			<LogoMark size={iconSize} />

@@ -444,7 +444,7 @@ PRESENTATION: [The opening clinical presentation — describe the patient's age,
 
 Requirements:
 - Keep the presentation to 3-5 sentences. Make it realistic and exam-appropriate.
-- Use varied patient demographics: randomize age (range 18–85), sex, and relevant social/occupational background. Do NOT default to a middle-aged or elderly male.`;
+- Use varied patient demographics: randomize age (range 18–85), sex, and relevant social/occupational background. Do NOT default to a mid-twenties, middle-aged, or elderly male.`;
 
 		try {
 			let full = "";
@@ -920,7 +920,7 @@ export function CasesPage() {
 
 			<AiDisclaimer storageKey="aimed:cases-disclaimer-seen" />
 
-			<ScrollArea className="flex-1 px-6 py-4">
+			<ScrollArea className="flex-1 min-h-0 px-6 py-4">
 				{cases.length === 0 ? (
 					<div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
 						<div className="flex size-14 items-center justify-center rounded-2xl bg-muted">
