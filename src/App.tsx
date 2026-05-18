@@ -13,6 +13,7 @@ import { getSettings } from "@/lib/storage";
 import { CasesPage } from "@/pages/CasesPage";
 import { ChatPage } from "@/pages/ChatPage";
 import { FlashcardsPage } from "@/pages/FlashcardsPage";
+import { LandingPage } from "@/pages/LandingPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 import { SetupPage } from "@/pages/SetupPage";
 
@@ -40,7 +41,8 @@ export default function App() {
 		<TooltipProvider>
 			<Router>
 				<Routes>
-					<Route index element={<InitialRedirect />} />
+					<Route index element={<LandingPage />} />
+					<Route path="/app" element={<InitialRedirect />} />
 					<Route path="/setup" element={<SetupPage />} />
 					<Route element={<Layout />}>
 						<Route path="/chat" element={<ChatPage />} />
