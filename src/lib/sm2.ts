@@ -2,23 +2,23 @@ import type { Flashcard } from "@/types";
 
 // FSRS v4 default weights (trained on open SR datasets)
 const W = [
-	0.4,   // w[0]  initial stability — Again
-	0.6,   // w[1]  initial stability — Hard
-	2.4,   // w[2]  initial stability — Good
-	5.8,   // w[3]  initial stability — Easy
-	4.93,  // w[4]  initial difficulty base (D₀ at Good)
-	0.94,  // w[5]  D₀ grade scale
-	0.86,  // w[6]  difficulty update step
-	0.01,  // w[7]  difficulty mean-reversion weight
-	1.49,  // w[8]  recall stability — base exponent
-	0.14,  // w[9]  recall stability — S decay factor
-	0.94,  // w[10] recall stability — R sensitivity
-	2.18,  // w[11] lapse stability — base
-	0.05,  // w[12] lapse stability — D exponent
-	0.34,  // w[13] lapse stability — S exponent
-	1.26,  // w[14] lapse stability — R exponent
-	0.29,  // w[15] hard penalty multiplier
-	2.61,  // w[16] easy bonus multiplier
+	0.4, // w[0]  initial stability — Again
+	0.6, // w[1]  initial stability — Hard
+	2.4, // w[2]  initial stability — Good
+	5.8, // w[3]  initial stability — Easy
+	4.93, // w[4]  initial difficulty base (D₀ at Good)
+	0.94, // w[5]  D₀ grade scale
+	0.86, // w[6]  difficulty update step
+	0.01, // w[7]  difficulty mean-reversion weight
+	1.49, // w[8]  recall stability — base exponent
+	0.14, // w[9]  recall stability — S decay factor
+	0.94, // w[10] recall stability — R sensitivity
+	2.18, // w[11] lapse stability — base
+	0.05, // w[12] lapse stability — D exponent
+	0.34, // w[13] lapse stability — S exponent
+	1.26, // w[14] lapse stability — R exponent
+	0.29, // w[15] hard penalty multiplier
+	2.61, // w[16] easy bonus multiplier
 ];
 
 // 6-hour floor: prevents cards from becoming due immediately after a lapse
@@ -68,10 +68,7 @@ function stabilityAfterRecall(
 // Stability after a lapse — resets based on current difficulty and prior stability
 function stabilityAfterLapse(D: number, S: number, R: number): number {
 	return (
-		W[11] *
-		D ** -W[12] *
-		((S + 1) ** W[13] - 1) *
-		Math.exp(W[14] * (1 - R))
+		W[11] * D ** -W[12] * ((S + 1) ** W[13] - 1) * Math.exp(W[14] * (1 - R))
 	);
 }
 
@@ -102,15 +99,19 @@ export interface SrsStage {
 const STAGE_THRESHOLDS = [0.5, 1, 4, 14, 30, 90, 180, 365] as const;
 
 const STAGES: SrsStage[] = [
-	{ name: "Clerkship I",     bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
-	{ name: "Clerkship II",    bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
-	{ name: "Clerkship III",   bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
-	{ name: "Clerkship IV",    bgClass: "bg-sky-500",    ringClass: "ring-sky-300" },
-	{ name: "Resident I",      bgClass: "bg-teal-600",   ringClass: "ring-teal-400" },
-	{ name: "Resident II",     bgClass: "bg-teal-600",   ringClass: "ring-teal-400" },
-	{ name: "Fellow",          bgClass: "bg-indigo-500", ringClass: "ring-indigo-300" },
-	{ name: "Attending",       bgClass: "bg-violet-600", ringClass: "ring-violet-400" },
-	{ name: "Board-Certified", bgClass: "bg-purple-700", ringClass: "ring-purple-500" },
+	{ name: "Clerkship I", bgClass: "bg-sky-500", ringClass: "ring-sky-300" },
+	{ name: "Clerkship II", bgClass: "bg-sky-500", ringClass: "ring-sky-300" },
+	{ name: "Clerkship III", bgClass: "bg-sky-500", ringClass: "ring-sky-300" },
+	{ name: "Clerkship IV", bgClass: "bg-sky-500", ringClass: "ring-sky-300" },
+	{ name: "Resident I", bgClass: "bg-teal-600", ringClass: "ring-teal-400" },
+	{ name: "Resident II", bgClass: "bg-teal-600", ringClass: "ring-teal-400" },
+	{ name: "Fellow", bgClass: "bg-indigo-500", ringClass: "ring-indigo-300" },
+	{ name: "Attending", bgClass: "bg-violet-600", ringClass: "ring-violet-400" },
+	{
+		name: "Board-Certified",
+		bgClass: "bg-purple-700",
+		ringClass: "ring-purple-500",
+	},
 ];
 
 export function getSrsStage(card: Flashcard): SrsStage {

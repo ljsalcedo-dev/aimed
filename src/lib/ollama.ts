@@ -12,7 +12,11 @@ export function getSettings(): OllamaSettings {
 		if (!raw) return DEFAULT_SETTINGS;
 		const parsed = JSON.parse(raw) as AppSettings;
 		if (parsed.mode === "cloud" && parsed.cloud?.baseUrl) {
-			return { ...parsed.cloud, baseUrl: "", proxyTarget: parsed.cloud.baseUrl };
+			return {
+				...parsed.cloud,
+				baseUrl: "",
+				proxyTarget: parsed.cloud.baseUrl,
+			};
 		}
 		return parsed.ollama ?? DEFAULT_SETTINGS;
 	} catch {
@@ -38,7 +42,9 @@ export async function* streamChat(
 		...messages.map((m) => ({ role: m.role, content: m.content })),
 	];
 
-	const headers: Record<string, string> = { "Content-Type": "application/json" };
+	const headers: Record<string, string> = {
+		"Content-Type": "application/json",
+	};
 	if (s.apiKey) headers.Authorization = `Bearer ${s.apiKey}`;
 	if (s.proxyTarget) headers["X-Ollama-Target"] = s.proxyTarget;
 
@@ -100,26 +106,40 @@ export async function* streamChat(
 	}
 }
 
-export async function checkConnection(baseUrl: string, apiKey?: string, proxyTarget?: string): Promise<boolean> {
+export async function checkConnection(
+	baseUrl: string,
+	apiKey?: string,
+	proxyTarget?: string,
+): Promise<boolean> {
 	try {
 		const headers: Record<string, string> = {};
 		if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 		if (proxyTarget) headers["X-Ollama-Target"] = proxyTarget;
 		const url = proxyTarget ? "/api/tags" : `${baseUrl}/api/tags`;
-		const res = await fetch(url, { headers, signal: AbortSignal.timeout(4000) });
+		const res = await fetch(url, {
+			headers,
+			signal: AbortSignal.timeout(4000),
+		});
 		return res.ok;
 	} catch {
 		return false;
 	}
 }
 
-export async function listModels(baseUrl: string, apiKey?: string, proxyTarget?: string): Promise<string[]> {
+export async function listModels(
+	baseUrl: string,
+	apiKey?: string,
+	proxyTarget?: string,
+): Promise<string[]> {
 	try {
 		const headers: Record<string, string> = {};
 		if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 		if (proxyTarget) headers["X-Ollama-Target"] = proxyTarget;
 		const url = proxyTarget ? "/api/tags" : `${baseUrl}/api/tags`;
-		const res = await fetch(url, { headers, signal: AbortSignal.timeout(4000) });
+		const res = await fetch(url, {
+			headers,
+			signal: AbortSignal.timeout(4000),
+		});
 		if (!res.ok) return [];
 		const data = (await res.json()) as { models?: { name: string }[] };
 		return data.models?.map((m) => m.name) ?? [];

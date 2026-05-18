@@ -7,7 +7,7 @@ export default async function handler(req: Request): Promise<Response> {
 
 	const headers: Record<string, string> = {};
 	const auth = req.headers.get("authorization");
-	if (auth) headers["Authorization"] = auth;
+	if (auth) headers.Authorization = auth;
 
 	try {
 		const res = await fetch(`${target}/api/tags`, {

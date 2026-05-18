@@ -190,8 +190,8 @@ function LocalSetup({ onReady }: { onReady: () => void }) {
 
 			<Step number={3} title="Allow app access">
 				<p className="text-sm text-muted-foreground">
-					Desktop apps run on a different origin than a browser, so Ollama blocks
-					them by default. Run this once
+					Desktop apps run on a different origin than a browser, so Ollama
+					blocks them by default. Run this once
 					{corsInfo ? ` in ${corsInfo.shell}` : ""} to allow aimed:
 				</p>
 				{corsInfo ? (
@@ -203,13 +203,17 @@ function LocalSetup({ onReady }: { onReady: () => void }) {
 					</>
 				) : (
 					<div className="flex flex-col gap-2 mt-2">
-						<p className="text-xs text-muted-foreground font-medium">Windows — PowerShell:</p>
-						<CodeBlock>
-							{CORS_STEPS.windows.command}
-						</CodeBlock>
-						<p className="text-xs text-muted-foreground font-medium mt-1">macOS — Terminal:</p>
+						<p className="text-xs text-muted-foreground font-medium">
+							Windows — PowerShell:
+						</p>
+						<CodeBlock>{CORS_STEPS.windows.command}</CodeBlock>
+						<p className="text-xs text-muted-foreground font-medium mt-1">
+							macOS — Terminal:
+						</p>
 						<CodeBlock>{CORS_STEPS.mac.command}</CodeBlock>
-						<p className="text-xs text-muted-foreground font-medium mt-1">Linux — Terminal:</p>
+						<p className="text-xs text-muted-foreground font-medium mt-1">
+							Linux — Terminal:
+						</p>
 						<CodeBlock>{CORS_STEPS.linux.command}</CodeBlock>
 					</div>
 				)}

@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { cn } from "@/lib/utils";
 import { getSettings } from "@/lib/storage";
+import { cn } from "@/lib/utils";
 import { AimedLogoSidebar } from "./AimedLogo";
 
 const NAV = [
