@@ -43,6 +43,22 @@ Best for: using the app without a local machine or GPU.
 
 ---
 
+## Desktop app
+
+Pre-built binaries for macOS, Windows, and Linux are available on the [Releases](../../releases) page. No Node.js or pnpm required — download, install, and run.
+
+| Platform | File |
+|---|---|
+| macOS (Apple Silicon) | `aimed_x.x.x_aarch64.dmg` |
+| macOS (Intel) | `aimed_x.x.x_x64.dmg` |
+| Windows | `aimed_x.x.x_x64-setup.exe` |
+| Linux (AppImage) | `aimed_x.x.x_amd64.AppImage` |
+| Linux (deb) | `aimed_x.x.x_amd64.deb` |
+
+The desktop app bundles the web UI in a [Tauri](https://tauri.app) shell. Ollama still needs to be running locally (or you can use Cloud mode — no Ollama required).
+
+---
+
 ## Local setup
 
 ### 1. Install prerequisites
