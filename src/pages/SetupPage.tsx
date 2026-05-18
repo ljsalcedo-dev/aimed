@@ -27,8 +27,22 @@ import { checkConnection } from "@/lib/ollama";
 import { getSettings, saveSettings } from "@/lib/storage";
 
 const CLOUD_MODELS = {
-	free: ["gemma3:4b", "gemma3:12b", "llama3.2:3b", "llama3.1:8b", "mistral:7b", "qwen2.5:7b", "phi4"],
-	paid: ["medgemma", "medgemma1.5", "gemma3:27b", "llama3.1:70b", "llama3.1:405b"],
+	free: [
+		"gemma3:4b",
+		"gemma3:12b",
+		"llama3.2:3b",
+		"llama3.1:8b",
+		"mistral:7b",
+		"qwen2.5:7b",
+		"phi4",
+	],
+	paid: [
+		"medgemma",
+		"medgemma1.5",
+		"gemma3:27b",
+		"llama3.1:70b",
+		"llama3.1:405b",
+	],
 };
 
 function isLocalHost() {
@@ -82,10 +96,51 @@ function CodeBlock({ children }: { children: string }) {
 	);
 }
 
+type Platform = "windows" | "mac" | "linux" | "unknown";
+
+function detectPlatform(): Platform {
+	const ua = navigator.userAgent;
+	if (ua.includes("Windows")) return "windows";
+	if (ua.includes("Macintosh") || ua.includes("Mac OS")) return "mac";
+	if (ua.includes("Linux")) return "linux";
+	return "unknown";
+}
+
+const CORS_STEPS: Record<
+	Exclude<Platform, "unknown">,
+	{ shell: string; command: string; restartNote: string }
+> = {
+	windows: {
+		shell: "PowerShell",
+		command:
+			'[System.Environment]::SetEnvironmentVariable("OLLAMA_ORIGINS","https://tauri.localhost","User")',
+		restartNote:
+			"Then quit Ollama from the system tray and reopen it for the change to take effect.",
+	},
+	mac: {
+		shell: "Terminal",
+		command: 'launchctl setenv OLLAMA_ORIGINS "tauri://localhost"',
+		restartNote:
+			"Then quit Ollama from the menu bar and reopen it. Re-run this command after each reboot.",
+	},
+	linux: {
+		shell: "Terminal",
+		command:
+			"echo 'export OLLAMA_ORIGINS=\"tauri://localhost\"' >> ~/.bashrc && source ~/.bashrc",
+		restartNote:
+			'Then restart Ollama: run "ollama serve" in a new terminal, or "sudo systemctl restart ollama" if using systemd.',
+	},
+};
+
 function LocalSetup({ onReady }: { onReady: () => void }) {
 	const current = getSettings();
 	const [url, setUrl] = useState(current.ollama.baseUrl);
-	const [status, setStatus] = useState<"idle" | "checking" | "ok" | "fail">("idle");
+	const [status, setStatus] = useState<"idle" | "checking" | "ok" | "fail">(
+		"idle",
+	);
+
+	const platform = detectPlatform();
+	const corsInfo = platform !== "unknown" ? CORS_STEPS[platform] : null;
 
 	async function test() {
 		setStatus("checking");
@@ -119,15 +174,48 @@ function LocalSetup({ onReady }: { onReady: () => void }) {
 			</Step>
 
 			<Step number={2} title="Pull the model">
-				<p className="text-sm text-muted-foreground">Run this in your terminal:</p>
+				<p className="text-sm text-muted-foreground">
+					Run this in your terminal:
+				</p>
 				<CodeBlock>{`ollama pull ${current.ollama.model}`}</CodeBlock>
 				<p className="text-xs text-muted-foreground mt-2">
-					About 5 GB. Ollama starts automatically on most systems. If not, also run{" "}
-					<code className="font-mono bg-muted px-1 py-0.5 rounded">ollama serve</code>.
+					About 5 GB. Ollama starts automatically on most systems. If not, also
+					run{" "}
+					<code className="font-mono bg-muted px-1 py-0.5 rounded">
+						ollama serve
+					</code>
+					.
 				</p>
 			</Step>
 
-			<Step number={3} title="Verify connection">
+			<Step number={3} title="Allow app access">
+				<p className="text-sm text-muted-foreground">
+					Desktop apps run on a different origin than a browser, so Ollama blocks
+					them by default. Run this once
+					{corsInfo ? ` in ${corsInfo.shell}` : ""} to allow aimed:
+				</p>
+				{corsInfo ? (
+					<>
+						<CodeBlock>{corsInfo.command}</CodeBlock>
+						<p className="text-xs text-muted-foreground mt-2">
+							{corsInfo.restartNote}
+						</p>
+					</>
+				) : (
+					<div className="flex flex-col gap-2 mt-2">
+						<p className="text-xs text-muted-foreground font-medium">Windows — PowerShell:</p>
+						<CodeBlock>
+							{CORS_STEPS.windows.command}
+						</CodeBlock>
+						<p className="text-xs text-muted-foreground font-medium mt-1">macOS — Terminal:</p>
+						<CodeBlock>{CORS_STEPS.mac.command}</CodeBlock>
+						<p className="text-xs text-muted-foreground font-medium mt-1">Linux — Terminal:</p>
+						<CodeBlock>{CORS_STEPS.linux.command}</CodeBlock>
+					</div>
+				)}
+			</Step>
+
+			<Step number={4} title="Verify connection">
 				<p className="text-sm text-muted-foreground mb-2.5">
 					Confirm aimed can reach Ollama:
 				</p>
@@ -162,7 +250,7 @@ function LocalSetup({ onReady }: { onReady: () => void }) {
 				)}
 				{status === "fail" && (
 					<p className="mt-3 text-sm text-destructive">
-						Could not connect. Is Ollama running?
+						Could not connect. Is Ollama running and has Step 3 been applied?
 					</p>
 				)}
 			</Step>
@@ -175,7 +263,9 @@ function CloudSetup({ onReady }: { onReady: () => void }) {
 	const [apiKey, setApiKey] = useState(current.cloud.apiKey ?? "");
 	const [model, setModel] = useState(current.cloud.model);
 	const [baseUrl, setBaseUrl] = useState(current.cloud.baseUrl);
-	const [status, setStatus] = useState<"idle" | "checking" | "ok" | "fail">("idle");
+	const [status, setStatus] = useState<"idle" | "checking" | "ok" | "fail">(
+		"idle",
+	);
 
 	async function test() {
 		if (!apiKey.trim()) return;
@@ -226,7 +316,15 @@ function CloudSetup({ onReady }: { onReady: () => void }) {
 					</div>
 					<div className="flex flex-col gap-1.5">
 						<Label className="text-xs text-muted-foreground">Model</Label>
-						<Select value={model} onValueChange={(v) => { if (v) { setModel(v); setStatus("idle"); } }}>
+						<Select
+							value={model}
+							onValueChange={(v) => {
+								if (v) {
+									setModel(v);
+									setStatus("idle");
+								}
+							}}
+						>
 							<SelectTrigger className="text-xs">
 								<SelectValue />
 							</SelectTrigger>
@@ -234,20 +332,26 @@ function CloudSetup({ onReady }: { onReady: () => void }) {
 								<SelectGroup>
 									<SelectLabel>Free</SelectLabel>
 									{CLOUD_MODELS.free.map((m) => (
-										<SelectItem key={m} value={m} className="font-mono text-xs">{m}</SelectItem>
+										<SelectItem key={m} value={m} className="font-mono text-xs">
+											{m}
+										</SelectItem>
 									))}
 								</SelectGroup>
 								<SelectGroup>
 									<SelectLabel>Paid</SelectLabel>
 									{CLOUD_MODELS.paid.map((m) => (
-										<SelectItem key={m} value={m} className="font-mono text-xs">{m}</SelectItem>
+										<SelectItem key={m} value={m} className="font-mono text-xs">
+											{m}
+										</SelectItem>
 									))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
 					</div>
 					<div className="flex flex-col gap-1.5">
-						<Label className="text-xs text-muted-foreground">API endpoint</Label>
+						<Label className="text-xs text-muted-foreground">
+							API endpoint
+						</Label>
 						<Input
 							value={baseUrl}
 							onChange={(e) => {
@@ -306,7 +410,8 @@ export function SetupPage() {
 
 				<h1 className="text-lg font-semibold">Get started</h1>
 				<p className="text-sm text-muted-foreground mt-1 mb-6">
-					Choose how you want to run aimed — locally on your device, or via a cloud API.
+					Choose how you want to run aimed — locally on your device, or via a
+					cloud API.
 				</p>
 
 				<Tabs defaultValue={defaultTab} onValueChange={() => setReady(false)}>
